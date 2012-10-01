@@ -10,7 +10,7 @@ Standart::Standart(string nome, string descricao, double preco, double duracao, 
 
 }
 
-string Standart::get_nome() const{
+string Standart::get_nome() const{ 
 	return nome;
 }
 
