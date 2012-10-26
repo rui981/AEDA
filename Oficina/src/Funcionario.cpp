@@ -1,78 +1,103 @@
 #include "Funcionario.h"
+#include <sstream>
 
 using namespace std;
 
 Funcionario::Funcionario(string nome, double contacto, string morada, int id,
-			string tipo, double salario, int horas_extra, vector <Veiculo*> veiculos):
-					Pessoa(nome, contacto, morada){
+		string tipo, double salario, int horasExtra, vector <Veiculo*> veiculos):
+							Pessoa(nome, contacto, morada){
 	this->id=id;
-	 this->tipo=tipo;
-	 this->salario=salario;
-	 this->horas_extra=horas_extra;
-	 this->veiculos=veiculos;
+	this->tipo=tipo;
+	this->salario=salario;
+	this->horasExtra=horasExtra;
+	this->veiculos=veiculos;
 }
-	Funcionario::~Funcionario(){
+Funcionario::~Funcionario(){
 
-	}
+}
 
-	int Funcionario::get_id() const{
-		return id;
-	}
+int Funcionario::getId() const{
+	return id;
+}
 
-	void Funcionario::set_id(int id){
-		this->id=id;
-	}
+void Funcionario::setId(int id){
+	this->id=id;
+}
 
-	string Funcionario::get_tipo() const{
-		return tipo;
-	}
+string Funcionario::getTipo() const{
+	return tipo;
+}
 
-	void Funcionario::set_tipo(string tipo){
-		this->tipo=tipo;
-	}
+void Funcionario::setTipo(string tipo){
+	this->tipo=tipo;
+}
 
-	double Funcionario::get_salario() const{
-		return salario;
-	}
-
-
-	void Funcionario::set_salario(double salario){
-		this->salario=salario;
-	}
-
-	int Funcionario::get_horas_extra() const{
-		return horas_extra;
-	}
+double Funcionario::getSalario() const{
+	return salario;
+}
 
 
-	void Funcionario::set_horas_extra(int horas_extra){
-		this->horas_extra=horas_extra;
-	}
+void Funcionario::setSalario(double salario){
+	this->salario=salario;
+}
 
-	vector <Veiculo*> Funcionario::get_veiculos() const{
-		return veiculos;
-	}
-
-	void Funcionario::set_veiculos(vector <Veiculo*> veiculos){
-		this->veiculos=veiculos;
-	}
+int Funcionario::getHorasExtra() const{
+	return horasExtra;
+}
 
 
-	void Funcionario::imprime(){
-		cout << "Nome: " << nome << endl;
-		cout << "Contacto: " << contacto << endl;
-		cout << "Morada: " << morada << endl;
-		cout << "Id: " << id << endl;
-		cout << "Tipo: " << tipo << endl;
-		cout << "Salario: " << salario << endl;
-		cout << "Numero horas extra: " << horas_extra << endl;
-		cout << "Veiculos: " ;
+void Funcionario::setHorasExtra(int horasExtra){
+	this->horasExtra=horasExtra;
+}
 
-		for(unsigned int i=0; i<veiculos.size(); i++){
-			cout << veiculos[i] << endl;
+vector <Veiculo*> Funcionario::getVeiculos() const{
+	return veiculos;
+}
+
+void Funcionario::setVeiculos(vector <Veiculo*> veiculos){
+	this->veiculos=veiculos;
+}
+
+
+
+string Funcionario::imprime(const Funcionario & func){
+	stringstream ss;
+	string retorno;
+
+	ss << func.nome<< endl;
+	ss << func.contacto << endl;
+	ss << func.morada <<endl;
+
+	ss << func.tipo << endl;
+	ss << func.salario << endl;
+	ss << func.horasExtra << endl;
+
+	for(unsigned int i=0; i<func.veiculos.size(); i++){
+			ss <<i << ": " << func.veiculos[i] << endl;
 		}
+
+retorno = ss.str();
+return retorno;
 }
 
 
+ostream& operator<< (ostream &out, const Funcionario &func){
+
+
+	out << "Nome: " << func.nome << endl;
+	out << "Contacto: " << func.contacto << endl;
+	out << "Morada: " << func.morada << endl;
+
+	out << "Id: " << func.getId() << endl;
+	out << "Tipo: " << func.getTipo() << endl;
+	out << "Salario: " << func.getSalario() << endl;
+	out << "Numero horas extra: " << func.getHorasExtra() << endl;
+	out << "Veiculos: " ;
+
+	for(unsigned int i=0; i<func.getVeiculos().size(); i++){
+		out <<i << ": " << func.getVeiculos()[i] << endl;
+	}
+
+	return out;}
 
 

@@ -10,31 +10,38 @@ Pessoa::~Pessoa(){
 
 }
 
-
-
-
-string Pessoa::get_nome() const {
+string Pessoa::getNome() const {
 	return nome;
 }
 
-void Pessoa::set_nome(string nome){
+void Pessoa::setNome(string nome){
 	this->nome=nome;
 }
 
 
-double Pessoa::get_contacto() const{
+double Pessoa::getContacto() const{
 	return contacto;
 }
 
-void Pessoa::set_contacto(double contacto){
+void Pessoa::setContacto(double contacto){
 	this->contacto=contacto;
 }
 
-string Pessoa::get_morada() const{
+string Pessoa::getMorada() const{
 	return morada;
 }
 
-void Pessoa::set_morada(string morada){
+void Pessoa::setMorada(string morada){
 	this->morada=morada;
 }
+
+/*
+string Pessoa::imprime(const Pessoa & peeps){
+	stringstream ss;
+	ss << nome<< endl;
+	ss << contacto << endl;
+	ss << morada <<endl;
+	return ss;
+}*/
+
 
