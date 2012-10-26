@@ -9,12 +9,11 @@
 #define Veiculo_H_
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
-/*
- *
- */
+
 class Veiculo
 {
 private:
@@ -33,56 +32,11 @@ public:
   void setMarca (string mc);
   void setModelo (string mdl);
   void setMatricula (string mt);
- // friend ostream & operator<<(ostream & o, const Veiculo & d);
-
+  friend ostream & operator<<(ostream & o, const Veiculo & v);
+ // int readFile(ofstream * file);
+  void escVeicFicheiro(Veiculo * v);
   virtual
   ~Veiculo();
-};
-
-/*
- *
- */
-class Carro: public Veiculo
-{
-private:
-  string tipo;
-public:
-  Carro();
-  Carro(int id, string mc, string mdl, string mt, string tp);
-  string getTipo() const;
-  void setTipo(string tp);
-  virtual
-  ~Carro();
-};
-
-
-/*
- *
- */
-class Camiao: public Veiculo
-{
-private:
-  string categoria;
-public:
-  Camiao();
-  Camiao(int id, string mc, string mdl, string mt, string cat);
-  string getCategoria() const;
-  void setCategoria(string cat);
-  virtual
-  ~Camiao();
-};
-
-
-/*
- *
- */
-class Bicicleta: public Veiculo
-{
-public:
-  Bicicleta();
-  Bicicleta(int id, string mc, string mdl, string mt);
-  virtual
-  ~Bicicleta();
 };
 
 

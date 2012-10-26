@@ -6,6 +6,7 @@
  */
 
 #include "Veiculo.h"
+#include <fstream>
 
 Veiculo::Veiculo()
 {
@@ -23,25 +24,17 @@ Veiculo::Veiculo(int id, string mc, string mdl, string mt)
   matricula = mt;
 }
 
-/*
-ostream & Veiculo::operator<<(ostream & o, const Veiculo & v)
-{
-  o < v.ID;
+//Operador cout de veiculo
+ostream & operator<<(ostream & o, const Veiculo & v){
+
+  o << "!**************************Veiculo:***********************************!" << endl;
+  o << "ID: " << v.getID() << endl;
+  o << "Marca: " << v.getMarca() << endl;
+  o << "Modelo: " << v.getModelo() << endl;
+  o << "Matricula: " << v.getMatricula() << endl;
+
   return o;
-}*/
-
-Carro::Carro(int id, string mc, string mdl, string mt, string tp):Veiculo(id,mc,mdl,mt)
-{
-  tipo = tp;
 }
-
-Camiao::Camiao(int id, string mc, string mdl, string mt, string cat):Veiculo(id,mc,mdl,mt)
-{
-  categoria = cat;
-}
-
-Bicicleta::Bicicleta(int id, string mc, string mdl, string mt):Veiculo(id,mc,mdl,mt)
-{}
 
 //Veiculo class methods implementation
 int Veiculo::getID() const
@@ -84,37 +77,34 @@ void Veiculo::setMatricula(string mt)
   matricula=mt;
 }
 
-//Carro class methods implementation
-string Carro::getTipo() const
-{
-  return tipo;
-}
-
-void Carro::setTipo(string tp)
-{
-  tipo = tp;
-}
-
-//Camiao class methods implementation
-string Camiao::getCategoria() const
-{
-  return categoria;
-}
-
-void Camiao::setCategoria(string cat)
-{
-  categoria = cat;
-}
-
 Veiculo::~Veiculo()
 {}
 
-Carro::~Carro()
-{}
 
-Camiao::~Camiao()
-{}
+void Veiculo::escVeicFicheiro(Veiculo * v){
 
-Bicicleta::~Bicicleta()
-{}
+  int ID = v->getID();
+  string marca = v->getMarca();
+  string modelo = v->getModelo();
+  string matricula = v->getMatricula();
+
+  ofstream filestr;
+
+  filestr.open("Veiculos.txt", ofstream::in | ofstream::app);
+
+  if(filestr.is_open())
+    {
+      cout << "Abriu o ficheiro de veiculos" << endl;
+
+      filestr << "ID: " << ID << endl;
+      filestr << "Marca: " << marca << endl;
+      filestr << "Modelo: " << modelo << endl;
+      filestr << "Matricula: " << matricula << endl;
+
+      filestr.close();
+    }
+  else
+    cout << "Nao abre" << endl;
+}
+
 
