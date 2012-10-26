@@ -18,16 +18,21 @@ protected:
 public:
 	Pessoa(string nome, double contacto, string morada);
 	virtual ~Pessoa();
-	virtual void imprime();
+//	virtual string imprime(const Pessoa & peeps);
+	virtual bool sabe(){
+		return false;
+	}
 
-	string get_nome() const;
-	void set_nome( string nome);
 
-	double get_contacto() const;
-	void set_contacto( double contacto);
+	string getNome() const;
+	void setNome( string nome);
 
-	string get_morada() const;
-	void set_morada(string morada);
+	double getContacto() const;
+	void setContacto( double contacto);
+	string getMorada() const;
+	void setMorada(string morada);
+	friend ostream& operator<< (ostream &out, const Pessoa &Pess);
+
 
 };
 

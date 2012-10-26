@@ -1,4 +1,5 @@
 #include "Cliente.h"
+#include <sstream>
 #include <iostream>
 #include <string>
 using namespace std;
@@ -14,32 +15,56 @@ Cliente::~Cliente(){
 
 }
 
-int Cliente::get_id() const {
+int Cliente::getId() const {
 	return id; }
 
-void Cliente::set_id(int id){
+void Cliente::setId(int id){
 	this->id=id;
 }
 
-vector<Veiculo*> Cliente::get_veiculos() const {
+vector<Veiculo*> Cliente::getVeiculos() const {
 	return veiculos;
 }
 
-void Cliente::set_veiculos(vector <Veiculo*> veiculos){
+void Cliente::setVeiculos(vector <Veiculo*> veiculos){
 	this->veiculos=veiculos;
 }
 
-void Cliente::imprime(){
-	cout << "Nome: " << nome << endl;
-	cout << "Contacto: " << contacto << endl;
-	cout << "Morada: " << morada << endl;
-	cout << "Id: " << id << endl;
-	cout << "Veiculos: ";
-	for(unsigned int i=0;i<veiculos.size();i++){
-		 cout << veiculos[i] << endl;
+
+
+
+ostream& operator<< (ostream &out,const Cliente &clie){
+	out << "Nome: " << clie.nome << endl;
+	out << "Contacto: " << clie.contacto << endl;
+	out << "Morada: " << clie.morada << endl;
+
+	out << "Id: " << clie.getId() << endl;
+	out << "Veiculos: "<< endl;
+	for(unsigned int i=0; i<clie.getVeiculos().size(); i++){
+		out << clie.getVeiculos()[i] << endl;
 	}
 
+return out;}
+
+
+string Cliente::imprime(const Cliente & clie){
+	stringstream ss;
+		string retorno;
+
+		ss << clie.nome<< endl;
+		ss << clie.contacto << endl;
+		ss << clie.morada <<endl;
+
+		ss << clie.id<< endl;
+
+		for(unsigned int i=0; i<clie.veiculos.size(); i++){
+				ss <<i << ": " << clie.veiculos[i] << endl;
+			}
+
+	retorno = ss.str();
+	return retorno;
 }
+
 
 
 

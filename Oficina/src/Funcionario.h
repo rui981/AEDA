@@ -13,31 +13,38 @@ private:
 	int id;
 	string tipo;
 	double salario;
-	int horas_extra;
+	int horasExtra;
 	vector <Veiculo*> veiculos;
 
 public:
 	Funcionario(string nome, double contacto, string morada, int id,
-			string tipo, double salario, int horas_extra, vector <Veiculo*> veiculos );
+			string tipo, double salario, int horasExtra, vector <Veiculo*> veiculos );
 	~Funcionario();
 
-	int get_id() const;
-	void set_id(int id);
+	int getId() const;
+	void setId(int id);
 
-	string get_tipo() const;
-	void set_tipo(string tipo);
+	string getTipo() const;
+	void setTipo(string tipo);
 
-	double get_salario() const;
-	void set_salario(double salario);
+	double getSalario() const;
+	void setSalario(double salario);
 
-	int get_horas_extra() const;
-	void set_horas_extra(int horas_extra);
+	int getHorasExtra() const;
+	void setHorasExtra(int horasExtra);
 
-	vector <Veiculo*> get_veiculos() const;
-	void set_veiculos(vector <Veiculo*> veiculos);
+	vector <Veiculo*> getVeiculos() const;
+	void setVeiculos(vector <Veiculo*> veiculos);
+	friend ostream& operator<< (ostream &out,const Funcionario &func);
+	string imprime(const Funcionario & func);
 
-	void imprime();
+	bool sabe(){
+		return false;
+	}
+
 };
+
+
 
 
 

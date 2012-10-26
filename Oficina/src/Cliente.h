@@ -16,18 +16,23 @@ class Cliente : public Pessoa {
 	vector <Veiculo*> veiculos;
 
 	public:
+	Cliente();
 
 	Cliente(string nome, double contacto, string morada, int id, vector <Veiculo*> veiculos);
+
+
 	~Cliente();
 
-	int get_id() const;
-	void set_id(int id);
+	int getId() const;
+	void setId(int id);
+	bool sabe(){
+		return true;
+	}
+	vector<Veiculo*> getVeiculos() const;
+	void setVeiculos (vector <Veiculo*> Veiculos);
+	friend ostream& operator<< (ostream &out,const Cliente &clie);
 
-	vector<Veiculo*> get_veiculos() const;
-	void set_veiculos (vector <Veiculo*> Veiculos);
-	void imprime();
-
-
+	string imprime(const Cliente & clie);
 
 };
 
