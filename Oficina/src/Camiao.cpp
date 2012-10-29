@@ -10,7 +10,7 @@
 Camiao::Camiao()
 {}
 
-Camiao::Camiao(int id, string mc, string mdl, string mt, string cat):Veiculo(id,mc,mdl,mt)
+Camiao::Camiao(string mc, string mdl, string mt, string cat):Veiculo(mc,mdl,mt)
 {
   categoria = cat;
 }
