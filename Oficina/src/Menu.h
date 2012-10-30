@@ -16,6 +16,7 @@
 #include "Camiao.h"
 #include "Bus.h"
 #include "Frota.h"
+//#include "Exception.h"
 
 using namespace std;
 
@@ -25,7 +26,13 @@ private:
   Frota * t;
 public:
   Menu(){};
-  int menu();
+  int menuFrota(Frota * ft);
+  Veiculo * getVeiculo();
+  class TamInv {
+  public:
+    int st;
+    TamInv(int s) { st = s; }
+  };
   virtual
   ~Menu(){};
 };
