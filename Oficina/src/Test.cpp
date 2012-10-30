@@ -9,6 +9,8 @@
 #include "Frota.h"
 #include "Menu.h"
 
+//TODO remover ids dos construtores
+/*
 void createVehicle_Test() {
 
   Carro * c1 = new Carro(1, "Datsun", "s30z", "RS-30-55", "Sports Coupe");
@@ -50,10 +52,11 @@ void runSuite(){
   cute::ide_listener lis;
   cute::makeRunner(lis)(s, "Suite de testes da oficina");
 }
-
+/*
 int main(){
   runSuite();
   Carro * c1 = new Carro(1, "Datsun", "s30z", "RS-30-55", "Sports Coupe");
+  vector<Veiculos *> vtemp;
 /*  Camiao * t1 = new Camiao(2, "Scania", "650h", "25-AS-94", "Semi");
   Bus * b1 = new Bus(3, "BUS", "Merda", "65-AA-87");
   Menu * m = new Menu();
@@ -61,10 +64,11 @@ int main(){
   cout <<  *t1 << endl;
   cout <<  *b1 << endl;*/
   //m->menu();
-  c1->escVeicFicheiro(c1);
+  //c1->ler/*
+ /*vtemp = c1->escVeicFicheiro(c1);
 
   return 0;
-}
+}*/
 
 
 

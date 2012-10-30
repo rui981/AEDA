@@ -9,6 +9,9 @@
 #define FROTA_H_
 
 #include "Veiculo.h"
+#include <fstream>
+#include <stdlib.h>
+
 
 using namespace std;
 /*
@@ -23,6 +26,9 @@ public:
   void adicionaVeiculo(Veiculo * v);
   void removeVeiculo(Veiculo * v);
   int numVeiculos();
+  void escVeicFicheiro();
+  vector<Veiculo *> lerVeiculos();
+  vector<Veiculo *> getFrota();
 
   virtual
   ~Frota();

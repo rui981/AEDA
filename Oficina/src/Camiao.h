@@ -20,7 +20,7 @@ private:
   string categoria;
 public:
   Camiao();
-  Camiao(int id, string mc, string mdl, string mt, string cat);
+  Camiao(string mc, string mdl, string mt, string cat);
   string getCategoria() const;
   void setCategoria(string cat);
   friend ostream & operator<<(ostream & o, const Camiao & cm);

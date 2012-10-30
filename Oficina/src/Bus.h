@@ -16,7 +16,7 @@ class Bus: public Veiculo
 {
 public:
   Bus();
-  Bus(int id, string mc, string mdl, string mt);
+  Bus(string mc, string mdl, string mt);
   friend ostream & operator<<(ostream & o, const Bus & b);
   virtual
   ~Bus();

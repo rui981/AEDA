@@ -10,7 +10,7 @@
 Carro::Carro()
 {}
 
-Carro::Carro(int id, string mc, string mdl, string mt, string tp):Veiculo(id,mc,mdl,mt)
+Carro::Carro(string mc, string mdl, string mt, string tp):Veiculo(mc,mdl,mt)
 {
   tipo = tp;
 }

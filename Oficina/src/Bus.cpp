@@ -10,7 +10,7 @@
 Bus::Bus()
 {}
 
-Bus::Bus(int id, string mc, string mdl, string mt):Veiculo(id,mc,mdl,mt)
+Bus::Bus(string mc, string mdl, string mt):Veiculo(mc,mdl,mt)
 {}
 
 Bus::~Bus()
