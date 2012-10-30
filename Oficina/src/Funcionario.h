@@ -4,21 +4,23 @@
 #include <iostream>
 #include "Pessoa.h"
 #include <vector>
-
+#include "Veiculo.h"
 
 using namespace std;
 
 class Funcionario : public Pessoa {
 private:
-	int id;
+	//int id;
 	string tipo;
 	double salario;
 	int horasExtra;
 	vector <Veiculo*> veiculos;
 
 public:
-	Funcionario(string nome, double contacto, string morada, int id,
-			string tipo, double salario, int horasExtra, vector <Veiculo*> veiculos );
+	Funcionario( int id,string nome, double contacto, string morada,
+			string tipo, double salario, int horasExtra);
+	Funcionario(string nome, double contacto, string morada, string tipo, double salario, int horasExtra);
+
 	~Funcionario();
 
 	int getId() const;

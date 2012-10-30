@@ -1,9 +1,13 @@
 #include "Pessoa.h"
 
+int Pessoa::I =1;
+
 Pessoa::Pessoa (string nome, double contacto, string morada){
 	this->nome=nome;
 	this->contacto=contacto;
 	this->morada=morada;
+	id=I;
+	I++;
 }
 
 Pessoa::~Pessoa(){
@@ -35,6 +39,11 @@ void Pessoa::setMorada(string morada){
 	this->morada=morada;
 }
 
+int Pessoa::getId() const{
+	return id;
+}
+
+
 /*
 string Pessoa::imprime(const Pessoa & peeps){
 	stringstream ss;
@@ -43,5 +52,6 @@ string Pessoa::imprime(const Pessoa & peeps){
 	ss << morada <<endl;
 	return ss;
 }*/
+
 
 

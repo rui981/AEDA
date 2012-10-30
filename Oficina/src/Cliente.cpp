@@ -4,12 +4,20 @@
 #include <string>
 using namespace std;
 
-Cliente::Cliente(string nome, double contacto, string morada, int id, vector <Veiculo*> veiculos)
+
+Cliente::Cliente(int id,string nome, double contacto, string morada)
 		:Pessoa(nome, contacto, morada)
 {
 	this->id=id;
-	this->veiculos=veiculos;
+
 }
+
+Cliente::Cliente(string nome, double contacto, string morada):Pessoa(nome, contacto, morada){
+
+
+}
+
+
 
 Cliente::~Cliente(){
 

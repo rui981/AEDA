@@ -6,15 +6,13 @@
 using namespace std;
 
 
-class Veiculo {
-
-};
-
 class Pessoa {
 protected:
 	string nome;
 	double contacto;
 	string morada;
+	static int I;
+	int id;
 public:
 	Pessoa(string nome, double contacto, string morada);
 	virtual ~Pessoa();
@@ -23,9 +21,12 @@ public:
 		return false;
 	}
 
+	//void escreveFicheiroFunc(vector <Pessoa*> pessoas);
 
 	string getNome() const;
 	void setNome( string nome);
+	virtual int getId() const;
+
 
 	double getContacto() const;
 	void setContacto( double contacto);

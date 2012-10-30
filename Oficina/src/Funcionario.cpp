@@ -3,15 +3,26 @@
 
 using namespace std;
 
-Funcionario::Funcionario(string nome, double contacto, string morada, int id,
-		string tipo, double salario, int horasExtra, vector <Veiculo*> veiculos):
+Funcionario::Funcionario(int id,string nome, double contacto, string morada,
+		string tipo, double salario, int horasExtra):
 							Pessoa(nome, contacto, morada){
 	this->id=id;
 	this->tipo=tipo;
 	this->salario=salario;
 	this->horasExtra=horasExtra;
-	this->veiculos=veiculos;
+
 }
+
+Funcionario::Funcionario(string nome, double contacto, string morada, string tipo, double salario, int horasExtra):
+	Pessoa(nome, contacto, morada){
+	this->tipo=tipo;
+		this->salario=salario;
+		this->horasExtra=horasExtra;
+
+
+}
+
+
 Funcionario::~Funcionario(){
 
 }
