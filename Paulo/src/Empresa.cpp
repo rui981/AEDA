@@ -7,8 +7,11 @@ Empresa::Empresa() {
 	try{
 		leClientes();
 	}
-	catch (IdInvalido) {
+	catch (FailLerClientes) {
 		cout << "Leitura de clientes falhou" << endl; 
+	}
+	catch (FicheiroVazio){
+		cout << "Nada para ler no ficheiro" << endl; 
 	}
 	
 	leFuncionarios();
@@ -252,7 +255,6 @@ void Empresa::novoFuncionario(Funcionario * f) {
 }
 
 void Empresa::leClientes() {
-	IdInvalido * idInv;
 	fstream ficheiro;
 
 	string nome, morada, contactoe;
@@ -264,7 +266,13 @@ void Empresa::leClientes() {
 		if (ficheiro.is_open()) {
 			while (!ficheiro.eof()) {
 				getline(ficheiro, nome);
-				if(nome==" ") return;
+				if(nome==" "){
+					//Se o ficheiro estiver vazio lança excepção
+					cout << "Ficheiro vazio, vou lancar excepcao\n";
+					FicheiroVazio fv;
+					throw fv;
+					//return;
+				 }
 				getline(ficheiro, contacto);
 				getline(ficheiro, morada);
 
@@ -274,8 +282,8 @@ void Empresa::leClientes() {
 		}
 		else {
 			cout << "Ficheiro nao aberto, vou lancar excepcao\n";
-			IdInvalido id;
-			throw  id;
+			FailLerClientes fc;
+			throw  fc;
 		}
 		
 		cout << "Sai de leClientes, no exceptions" << endl;

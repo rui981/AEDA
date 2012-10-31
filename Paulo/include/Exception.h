@@ -12,6 +12,7 @@
 
 class IdInvalido {};
 class FailLerClientes {};
+class FicheiroVazio {};
 class FileClose {};
 
 
