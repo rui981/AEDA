@@ -11,7 +11,7 @@ Empresa::Empresa() {
 		cout << "Leitura de clientes falhou" << endl; 
 	}
 	catch (FicheiroVazio){
-		cout << "Nada para ler no ficheiro" << endl; 
+		cout << "Nada para ler no ficheiro :(" << endl; 
 	}
 	
 	leFuncionarios();
@@ -259,6 +259,7 @@ void Empresa::leClientes() {
 
 	string nome, morada, contactoe;
 	string contacto;
+	bool teste = false;
 
 	ficheiro.open("Clientes.txt", ios::in);
 //	ficheiro.close();
@@ -266,7 +267,8 @@ void Empresa::leClientes() {
 		if (ficheiro.is_open()) {
 			while (!ficheiro.eof()) {
 				getline(ficheiro, nome);
-				if(nome==" "){
+				//if(nome==" "){
+					if(!teste) {
 					//Se o ficheiro estiver vazio lança excepção
 					cout << "Ficheiro vazio, vou lancar excepcao\n";
 					FicheiroVazio fv;
