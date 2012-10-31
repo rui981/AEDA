@@ -1,6 +1,6 @@
-#include "cute.h"
+/*#include "cute.h"
 #include "ide_listener.h"
-#include "cute_runner.h"
+#include "cute_runner.h"*/
 #include <string>
 #include "Veiculo.h"
 #include "Carro.h"
@@ -57,7 +57,7 @@ int main(){
   runSuite();
   Carro * c1 = new Carro(1, "Datsun", "s30z", "RS-30-55", "Sports Coupe");
   vector<Veiculos *> vtemp;
-  Camiao * t1 = new Camiao(2, "Scania", "650h", "25-AS-94", "Semi");
+ Camiao * t1 = new Camiao(2, "Scania", "650h", "25-AS-94", "Semi");
   Bus * b1 = new Bus(3, "BUS", "Merda", "65-AA-87");
   Menu * m = new Menu();
   cout <<  *c1 << endl;

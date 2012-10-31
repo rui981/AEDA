@@ -3,11 +3,9 @@
 
 #include <string>
 #include <vector>
+#include "Funcionario.h"
 using namespace std;
-class Funcionario{
 
-};
- 
 
 class Servico{
 private:
@@ -23,8 +21,9 @@ public:
 	string get_data_fim() const;
 	void set_data_fim(string data);
 	vector<Funcionario *> get_responsaveis() const;
-//	virtual void imprime();
+	//virtual void imprime();
 	void adicionar_funcionario( Funcionario * funcionario);
+
 };
 
 

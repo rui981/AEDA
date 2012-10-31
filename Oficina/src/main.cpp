@@ -11,19 +11,22 @@
 #include "Camiao.h"
 #include "Bus.h"
 #include "Frota.h"
+#include "Funcionario.h"
+#include "Cliente.h"
+#include "Empresa.h"
 
 using namespace std;
 
 int main(){
 //Parte Paulo
-  Veiculo * c1 = new Veiculo("A", "hhyf", "Radaddas");
-  Veiculo * c2 = new Veiculo("Jk", "hhyf", "Radaddas");
-  Veiculo * c3 = new Veiculo("Jk", "hhyf", "Radaddas");
+  Veiculo * c11 = new Veiculo("A", "hhyf", "Radaddas");
+  Veiculo * c22 = new Veiculo("Jk", "hhyf", "Radaddas");
+  Veiculo * c33 = new Veiculo("Jk", "hhyf", "Radaddas");
   Frota * fleet = new Frota();
 
-  fleet->adicionaVeiculo(c1);
-  fleet->adicionaVeiculo(c2);
-  fleet->adicionaVeiculo(c3);
+  fleet->adicionaVeiculo(c11);
+  fleet->adicionaVeiculo(c22);
+  fleet->adicionaVeiculo(c33);
 
   fleet->lerVeiculos();
   fleet->escVeicFicheiro();
@@ -32,8 +35,8 @@ int main(){
 
 	Funcionario *p1 = new Funcionario("joao", 122, "av cenas", "cenas", 2345, 3);
 
-	Cliente *c1 =new Cliente("nome", 55415, "morada");
-	Cliente *c2 =new Cliente("PILA", 55415, "mLAorada");
+/*	Cliente *c1 =new Cliente("nome", 55415, "morada");
+	Cliente *c2 =new Cliente("PILA", 55415, "mLAorada");*/
 
 	Empresa *emp = new Empresa();
 	emp->novoFuncionario(p1);

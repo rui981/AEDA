@@ -1,16 +1,15 @@
 #ifndef STANDART_H
 #define STANDART_H
 #include "Servico.h"
-#include <string>
 
-class Standart: public Servico{
+class Standart:public Servico{
 private:
 	string nome;
 	string descricao;
 	double preco;
 	double duracao;
-private:
-	Standart(string nome, string descricao, double preco, double duracao, string data_inicio, string data_fim);
+public:
+	Standart(string nome, string descricao,double preco, double duracao, string data_inicio, string data_fim);
 	string get_nome() const;
 	void set_nome(string nome);
 	string get_descricao() const;
@@ -19,7 +18,7 @@ private:
 	void set_preco(double preco);
 	double get_duracao() const;
 	void set_duracao(double duracao);
-	void imprime();
+	//void imprime();
 
 };
 

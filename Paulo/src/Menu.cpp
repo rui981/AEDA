@@ -8,7 +8,7 @@
 #include "Menu.h"
 
 int Menu::menuFrota(Frota * ft){
-/*
+
   cout << "|......................GESTAO DE FROTA...........................|" << endl << endl;
   cout << "Seleccione uma opcão:" << endl;
   cout << "1: Listar Veiculos" << endl;
@@ -45,12 +45,11 @@ int Menu::menuFrota(Frota * ft){
 
   }
 
-  cout << "|......................CLOSING...........................|" << endl;*/
+  cout << "|......................CLOSING...........................|" << endl;
   return 0;
 }
 
 Veiculo * Menu::getVeiculo(){
-  /*
   bool b = false;
   string brand,model,lp;
 
@@ -91,10 +90,9 @@ Veiculo * Menu::getVeiculo(){
             throw TamInv(6);
         }
         b = true;
-    }while(!b); */
+    }while(!b);
 
-  /*  Veiculo * vei = new Veiculo(brand, model, lp); */
-  Veiculo * vei = new Veiculo();
+    Veiculo * vei = new Veiculo(brand, model, lp);
     return vei;
 
 }
