@@ -7,10 +7,9 @@ Empresa::Empresa() {
 	try{
 		leClientes();
 	}
-	catch (Exception::FailLerClientes &) {
+	catch (IdInvalido) {
 		cout << "Leitura de clientes falhou" << endl; 
 	}
-	//cout << "Leitura com sucesso" << endl;
 	
 	leFuncionarios();
 
@@ -253,15 +252,14 @@ void Empresa::novoFuncionario(Funcionario * f) {
 }
 
 void Empresa::leClientes() {
+	IdInvalido * idInv;
 	fstream ficheiro;
 
 	string nome, morada, contactoe;
 	string contacto;
 
-	cout << "Vou abrir ficheiro\n";
 	ficheiro.open("Clientes.txt", ios::in);
-	cout << "Abri o ficheiro\n";
-	ficheiro.close();
+//	ficheiro.close();
 
 		if (ficheiro.is_open()) {
 			while (!ficheiro.eof()) {
@@ -272,16 +270,15 @@ void Empresa::leClientes() {
 
 				Cliente * ce = new Cliente(nome, contacto, morada);
 				clientes.push_back(ce);
-				cout << "Ando a ler\n";
 			}
-			cout << "Li tudo\n";
 		}
 		else {
 			cout << "Ficheiro nao aberto, vou lancar excepcao\n";
-			throw Exception::FailLerClientes();
+			IdInvalido id;
+			throw  id;
 		}
 		
-		cout << "Sai de leClientes" << endl;
+		cout << "Sai de leClientes, no exceptions" << endl;
 }
 
 

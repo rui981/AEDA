@@ -10,13 +10,10 @@
 #include <fstream>
 #include <stdlib.h>
 
-class Exception {
-
-public:
-  class IdInvalido {};
-  class FailLerClientes {};
-  class FileClose {};
-};
+class IdInvalido {};
+class FailLerClientes {};
+class FileClose {};
 
 
 #endif /* EXCEPTION_H_ */
+
