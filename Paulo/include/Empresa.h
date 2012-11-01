@@ -10,11 +10,15 @@
 #include "Camiao.h"
 #include "Bus.h"
 
+#include "Servico.h"
+#include "Standart.h"
+
 #include <iostream>
 #include <vector>
+
+#define MAX_SIZE 5;
+
 using namespace std;
-
-
 
 class Empresa{
 private:
@@ -24,22 +28,28 @@ private:
 
 	vector<Veiculo *> veiculos;
 	vector <Carro *> carros;
-	vector <Bus*> buses;
-	vector <Camiao*> camioes;
+	vector <Bus *> buses;
+	vector <Camiao *> camioes;
 
+	vector <Standard *> standards;
+	vector<Servico *> servicos;
 public:
 	Empresa();
 	~Empresa();
 
 	void menu();
+
 	void clear();
 	void pause();
+
 	void novoFuncionario(Funcionario* func);
 	void novoCliente(Cliente* c);
 
 	void modificaFunc();
 	void modificaCli();
 	void modificaVeic();
+
+	void modificaServ();
 
 	void removeFuncionario(int i);
 	void removeCliente(int indice);
@@ -63,6 +73,9 @@ public:
 	void removeCamiao(int indice);
 	void removeBus(int indice);
 
+	void novoStandard(Standard *s);
+	void removeStandard(int indice);
+
 	void escreveCarros();
 
 	void leCarros();
@@ -71,6 +84,14 @@ public:
 
 	void leCamioes();
 	void escreveCamioes();
+
+	void escreveStandards();
+	void leStandards();
+
+	void adicionaVeiculoFuncionario();
+
+	void listaVeiculosServicos(Veiculo *v);
+
 
 };
 #endif
