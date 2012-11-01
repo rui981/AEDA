@@ -15,6 +15,7 @@
 
 #include <iostream>
 #include <vector>
+#include <unistd.h>
 
 #define MAX_SIZE 5;
 

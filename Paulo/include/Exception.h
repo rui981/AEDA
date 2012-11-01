@@ -14,16 +14,26 @@
 
 using namespace std;
 
-class IdInvalido {};
+//Excepções Ficheiros
 class FailLerClientes {};
 class FailEscreverClientes {};
 class FicheiroVazio {};
 class FileClose {};
-class FuncionarioOBF {};
-class NomeOFB: public FuncionarioOBF{};
-class ContactoOFB: public FuncionarioOBF{};
-class MoradaOFB: public FuncionarioOBF{};
-class TipoOFB: public FuncionarioOBF{};
-class SalarioOFB: public FuncionarioOBF{};
+//Excepções menu Funcionario
+class FuncionarioOFB {};
+class fNomeOFB: public FuncionarioOFB{};
+class fContactoOFB: public FuncionarioOFB{};
+class fMoradaOFB: public FuncionarioOFB{};
+class fTipoOFB: public FuncionarioOFB{};
+class fSalarioOFB: public FuncionarioOFB{};
+//Excepções menu Cliente
+class ClienteOFB {};
+class cNomeOFB: public ClienteOFB {};
+class cMoradaOFB: public ClienteOFB {};
+class cContactoOFB: public ClienteOFB {};
+class ClienteInvalido: public ClienteOFB {};
+//Excepções Opcões
+class OpcoesExc {};
+class OFBOpcoes: public OpcoesExc {}; //Opcao out of bounds
 
 #endif /* EXCEPTION_H_ */

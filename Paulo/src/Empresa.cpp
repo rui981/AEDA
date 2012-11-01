@@ -551,8 +551,10 @@ void Empresa::leStandards() {
 ///////////////////////////////////MENU geral////////////////////////////////////
 
 void Empresa::menu() {
-	int op, opF, opC;
-	string nomeCliente, moradaCliente, contactoCliente;
+		int op;
+	int opF, opC;
+	string nomeCliente, moradaCliente, contactoCliente,ope;
+	
 	do {
 		clear();
 		cout << "Bemvindo a empresa Jopati" << endl << endl;
@@ -563,7 +565,25 @@ void Empresa::menu() {
 		cout << "Sair--------------------------0" << endl;
 		cout << "Escolha a sua opcao" << endl;
 		cout << "Opcao : ";
-		cin >> op;
+	
+	
+		try {		
+			cin >> op;
+				
+			if(op < 0 || op > 4) {
+					OFBOpcoes o;
+					throw o;
+			}			
+		}
+		
+		catch (OpcoesExc){
+			cout << "Opção Invalida" << endl;
+			pause();
+			clear();
+			menu();
+		}
+
+		
 		switch (op) {
 		case 1: {
 
@@ -577,7 +597,21 @@ void Empresa::menu() {
 			cout << "Adicionar Veiculo a Funcionario------5" << endl;
 			cout << "Remover Veiculo a Funcionario--------6" << endl;
 			cout << "Sair---------------------------------0" << endl;
-			cin >> opF;
+			try{	
+				cin >> opF;
+				
+					if(opF < 0 && opF > 6) {
+						OFBOpcoes ofb;
+						throw ofb;
+					}
+				}
+			catch (OpcoesExc) {
+				cout << "Opçao invalida" << endl;
+				pause();
+				clear();
+				menu();
+			} 
+								
 			cin.ignore(1000, '\n');
 
 			string nome, contacto, morada, tipo, salarioe;
@@ -593,55 +627,41 @@ void Empresa::menu() {
 					cout << "Insira nome de Funcionario" << endl;
 					getline(cin, nome);
 						if(nome.size() > 5){
-						NomeOFB nb;
+						fNomeOFB nb;
 						throw nb;
 						}
 									
 					cout << "Insira contacto de Funcionario" << endl;
 					getline(cin, contacto);
 						if(contacto.size() > 5){
-						ContactoOFB cb;
+						fContactoOFB cb;
 						throw cb;
 						}
 					
 					cout << "Insira morada de Funcionario" << endl;
 					getline(cin, morada);
 					if(morada.size() > 5){
-						MoradaOFB mb;
+						fMoradaOFB mb;
 						throw mb;
 						}
 					cout << "Insira tipo de Funcionario" << endl;
 					getline(cin, tipo);
 					if(tipo.size() > 5){
-						TipoOFB tb;
+						fTipoOFB tb;
 						throw tb;
 						}
 					cout << "Insira salario de Funcionario" << endl;
 					getline(cin, salarioe);
 					if(salarioe.size() > 5){
-						SalarioOFB sb;
+						fSalarioOFB sb;
 						throw sb;
 						}
 				}
-					catch (NomeOFB) {
-						cout << "Nome OFB" << endl;
-						exit(-1);
-					}
-					catch (ContactoOFB) {
-						cout << "Contacto OFB" << endl;
-						exit(-2);
-					}
-					catch (MoradaOFB) {
-						cout << "Morada OFB" << endl;
-						exit(-3);
-					}
-					catch (TipoOFB) {
-						cout << "Tipo OFB" << endl;
-						exit(-4);
-					}
-					catch (SalarioOFB) {
-						cout << "Salario OFB" << endl;
-						exit(-5);
+					catch (FuncionarioOFB) {
+						cout << "String Overflow.... A relançar menu" << endl;
+						pause();
+						clear();
+						menu();
 					}
 									
 					salario = atof(salarioe.c_str());
@@ -654,7 +674,20 @@ void Empresa::menu() {
 					cout << "Confirma os dados?" << endl;
 					cout << "Sim----------------------1" << endl;
 					cout << "Nao----------------------2" << endl;
-					cin >> confirmacao;
+					try {
+						cin >> confirmacao;
+						if(confirmacao < 1 && confirmacao > 2) {
+							OFBOpcoes of;
+							throw of;
+						}
+					}
+					catch (OpcoesExc) {
+						cout << "Opção Invalida" << endl;
+						pause();
+						clear();
+						menu();
+					}
+						
 					if (confirmacao == 1) {
 						novoFuncionario(funcTemp);
 					} else {
@@ -662,7 +695,7 @@ void Empresa::menu() {
 						cout << "Nao-----------1" << endl;
 						cout << "Sim-----------2" << endl;
 						cin >> confirmacao;
-
+						cin.ignore(1000, '\n');
 					}
 
 				} while (confirmacao != 1);
@@ -750,20 +783,59 @@ void Empresa::menu() {
 			cout << "Modificar Cliente----------------3" << endl;
 			cout << "Listar Clientes------------------4" << endl;
 			cout << "Sair---------------------------------0" << endl;
-			cin >> opC;
+			
+			try {
+				cin >> opC;
+				
+				if(opC < 0 && opC > 4) {
+					OFBOpcoes of;
+					throw of;
+				}
+			}
+			catch (OpcoesExc)  {
+				cout << "Opção Invalida: " << endl;
+				pause();
+				clear();
+				menu();
+			}
+				
 			cin.ignore(1000, '\n');
-
+		
 			switch (opC) {
+				
 			case 1: {
 				int confirmacao;
 				do {
+				 try{
 					clear();
 					cout << "insira nome do Cliente" << endl;
-					getline(cin, nomeCliente);
+					getline(cin, nomeCliente);					
+					if(nomeCliente.size() > 5) {
+						cNomeOFB of;
+						throw of;
+					} 
+					
 					cout << "Insira morada do CLiente" << endl;
 					getline(cin, moradaCliente);
+					if(moradaCliente.size() > 5) {
+						cMoradaOFB om;
+						throw om;
+					}
+					
 					cout << "Insira contacto cliente" << endl;
 					getline(cin, contactoCliente);
+					if(contactoCliente.size() > 5) {
+						cContactoOFB oc;
+						throw oc;
+					}
+				}
+				catch (ClienteOFB) {
+					cout << "String Overflow" << endl;
+					pause();
+					clear();
+					menu(); 
+				}
+								
 					Cliente * cliTemp = new Cliente(nomeCliente,
 							contactoCliente, moradaCliente);
 					clear();
@@ -845,7 +917,21 @@ void Empresa::menu() {
 					cout << i + 1 << "  " << clientes[i]->getNome() << endl;
 				}
 				cout << "Qual o cliente que deseja analisar?" << endl;
-				cin >> opcao;
+				
+				try {
+					cin >> opcao;
+					
+					if(opcao < 1 && opcao > clientes.size()) {
+						ClienteInvalido inv;
+						throw inv;
+					}
+				}
+				catch (ClienteOFB){
+						cout << "Cliente Invalido" << endl;
+						pause();
+						clear();
+						menu();
+					}
 				cin.ignore(1000, '\n');
 
 				cout << *(clientes[opcao - 1]) << endl;
