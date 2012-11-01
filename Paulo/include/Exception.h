@@ -12,8 +12,10 @@
 
 class IdInvalido {};
 class FailLerClientes {};
+class FailEscreverClientes {};
 class FicheiroVazio {};
 class FileClose {};
+class OutofBounds{};
 
 
 #endif /* EXCEPTION_H_ */

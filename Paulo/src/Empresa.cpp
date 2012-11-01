@@ -43,18 +43,51 @@ void Empresa::pause() {
 void Empresa::escreveClientes() {
 	fstream ficheiro;
 	ficheiro.open("Clientes.txt", fstream::out);
-
+	
+try {
 	if (ficheiro.is_open()) {
 		for (unsigned int i = 0; i < clientes.size(); i++) {
-			ficheiro << clientes[i]->getNome() << endl;
-			ficheiro << clientes[i]->getContacto() << endl;
-			ficheiro << clientes[i]->getMorada();
+
+			if(sizeof(clientes[i]->getNome()) > 20){
+				OutofBounds ob;				 
+				throw ob;
+			}
+			else {
+				ficheiro << clientes[i]->getNome() << endl;
+			}
+			
+			if(sizeof(clientes[i]->getContacto()) > 20) {
+				OutofBounds ob;				 
+				throw ob;
+			}
+			else {
+				ficheiro << clientes[i]->getContacto() << endl;
+			}
+			
+			if(sizeof(clientes[i]->getMorada()) > 20){
+				OutofBounds ob;				 
+				throw ob;
+			}
+			else {		
+				ficheiro << clientes[i]->getMorada();
+			}
 			if (i != clientes.size() - 1) {
 				ficheiro << endl;
 			}
 		}
 	}
-	ficheiro.close();
+	else {	
+		FailEscreverClientes fe;
+		throw fe;
+		} 
+	}
+	catch (FailEscreverClientes){
+		cout << "Nao consegue escrever para Clientes.txt" << endl;
+	}
+	catch (OutofBounds){
+		cout << "String demasiado comprida" << endl;
+	}
+	ficheiro.close();	
 }
 
 void Empresa::escreveFuncionarios() {

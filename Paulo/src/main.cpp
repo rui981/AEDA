@@ -16,13 +16,14 @@
 #include "Cliente.h"
 #include "Pessoa.h"
 #include "Empresa.h"
+#include "Exception.h"
 
 using namespace std;
 
 int main(){
 	Empresa *emp = new Empresa();
 
-
+	
 
 
 	//emp->menu();
