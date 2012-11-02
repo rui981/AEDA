@@ -2755,7 +2755,21 @@ void Empresa::modificaVeic() {
 			cout << i + 1 << "   " << buses[i]->getMarca() << endl;
 		}
 		cout << "Selecione qual o bus que deseja modificar" << endl;
-		cin >> nBus;
+		try {
+			cin >> nBus;
+			if(nBus < 1 || nBus > buses.size()) {
+				BusInvalido bi;
+				throw bi;
+			}
+		}
+		catch (VeicExc) {
+			cout << "Bus inexistente" << endl;
+			pause();
+			clear();
+			menu();
+		}
+			
+			
 		cin.ignore(1000, '\n');
 
 		clear();
@@ -2764,7 +2778,21 @@ void Empresa::modificaVeic() {
 		cout << "Modelo-----------------------2" << endl;
 		cout << "Matricula--------------------3" << endl;
 		cout << "Sair-------------------------0" << endl;
-		cin >> opcao;
+		
+		try {
+			cin >> opcao;
+			if(opcao < 0 || opcao > 3){
+				OFBOpcoes o;
+				throw o;
+			}
+		}
+		catch (OpcoesExc){
+			cout << "Opção Invalida" << endl;
+			pause();
+			clear();
+			menu();
+		}
+		
 		cin.ignore(1000, '\n');
 
 		clear();
@@ -2773,6 +2801,19 @@ void Empresa::modificaVeic() {
 		case 1: {
 			cout << "Insira nova marca" << endl;
 			getline(cin, marca);
+			try {
+				if(marca.size() > 5) {
+					BusMarcaExc bm;
+					throw bm;
+				}
+			}
+			catch (VeicExc){
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			buses[nBus - 1]->setMarca(marca);
 
 		}
@@ -2780,12 +2821,38 @@ void Empresa::modificaVeic() {
 		case 2: {
 			cout << "Insira novo modelo" << endl;
 			getline(cin, modelo);
+				try {
+				if(modelo.size() > 5) {
+					BusModeloExc bmt;
+					throw bmt;
+				}
+			}
+			catch (VeicExc){
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			buses[nBus - 1]->setMarca(modelo);
 		}
 			break;
 		case 3: {
 			cout << "Insira nova matricula" << endl;
 			getline(cin, matricula);
+				try {
+				if(matricula.size() > 5) {
+					BusMatrExc bmp;
+					throw bmp;
+				}
+			}
+			catch (VeicExc){
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			buses[nBus - 1]->setMatricula(matricula);
 			pause();
 		}
