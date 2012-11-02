@@ -33,6 +33,14 @@ class cNomeOFB: public ClienteOFB {};
 class cMoradaOFB: public ClienteOFB {};
 class cContactoOFB: public ClienteOFB {};
 class ClienteInvalido: public ClienteOFB {};
+//Excepções menu Serviços
+class ServicosExc{};
+class DataIniExc: public ServicosExc {};
+class DataFimExc: public ServicosExc {};
+class NomServExc: public ServicosExc {};
+class DescServExc: public ServicosExc {};
+class PrecoServExc: public ServicosExc {};
+class DuracaoServExc: public ServicosExc {};
 //Excepções Opcões
 class OpcoesExc {};
 class OFBOpcoes: public OpcoesExc {}; //Opcao out of bounds

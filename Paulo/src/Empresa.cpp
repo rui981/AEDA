@@ -1009,7 +1009,20 @@ void Empresa::menu() {
 						cout << "Deseja inserir os dados de novo?" << endl;
 						cout << "Nao-----------1" << endl;
 						cout << "Sim-----------2" << endl;
-						cin >> conf;
+						
+						try {		
+							cin >> conf;
+							if(conf < 1 || conf > 2) {
+							OFBOpcoes o;
+							throw o;
+							}
+						}
+						catch (OpcoesExc) {
+							cout << "Opção Invalida" << endl;
+							pause();
+							clear();
+							menu();
+						} 
 
 						pause();
 					}
@@ -1072,7 +1085,21 @@ void Empresa::menu() {
 			cout << "Adicionar Servico a veiculo---------------5" << endl;
 			cout << "Retirar Servico a veiculo-----------------6" << endl;
 			cout << "Sair---------------------------------0" << endl;
-			cin >> opS;
+			
+			try {
+				cin >> opS;
+				if(opS < 0 || opS > 6) {
+					OFBOpcoes o;
+					throw o;
+				}
+			}
+			catch (OpcoesExc) {
+				cout << "Opção invalida" << endl;
+				pause();
+				clear();
+				menu();
+			}
+				
 			cin.ignore(1000, '\n');
 			clear();
 
@@ -1080,18 +1107,57 @@ void Empresa::menu() {
 			case 1: {		// Adicionar Servico Standard
 				int conf;
 				do {
+					
+				try {	
 					cout << "Insira data de inicio (XX-XX-XX)" << endl;
-					getline(cin, datai);
+					getline(cin, datai);				
+					if(datai.size() > 5) {
+						DataIniExc di;
+						throw di;
+					}
+					
 					cout << "Insira data de fim (XX-XX-XX)" << endl;
 					getline(cin, dataf);
+					if(dataf.size() > 5) {
+						DataFimExc df;
+						throw df;
+					}
+					
 					cout << "Insira nome do servico" << endl;
 					getline(cin, nome);
+					if(nome.size() > 5) {
+						NomServExc ns;
+						throw ns;	
+					}
+					
 					cout << "Insira descricao do servico" << endl;
 					getline(cin, descricao);
+					if(descricao.size() > 5) {
+						DescServExc dc;
+						throw dc;	
+					}
+					
 					cout << "Insira preco por hora do servico" << endl;
 					getline(cin, precoe);
+					if(precoe.size() > 5) {
+						PrecoServExc ps;
+						throw ps;
+					}
+					
 					cout << "Insira duracao do servico" << endl;
 					getline(cin, duracaoe);
+					if(duracaoe.size() > 5) {
+						DuracaoServExc ds;
+						throw ds;
+					}
+				}
+				catch (ServicosExc) {
+						cout << "String Overflow" << endl;
+						pause();
+						clear();
+						menu();
+					}
+					
 					preco = atof(precoe.c_str());
 					duracao = atof(duracaoe.c_str());
 					Standard *s = new Standard(nome, descricao, preco, duracao,
