@@ -1165,14 +1165,42 @@ void Empresa::menu() {
 					cout << "Servico bem criado?" << endl;
 					cout << "Sim----------------1" << endl;
 					cout << "Nao----------------2" << endl;
-					cin >> conf;
+					
+					try {
+						cin >> conf;
+						if (conf < 1 || conf > 2) {
+							OFBOpcoes o;
+							throw o;
+						}
+					}
+					catch (OpcoesExc) {
+						cout << "Opção invalida" << endl;
+						pause();
+						clear();
+						menu();
+					}
+						
 					if (conf == 1) {
 						novoStandard(s);
 					} else {
 						cout << "Deseja repetir os dados?" << endl;
 						cout << "Nao----------------1" << endl;
 						cout << "Sim----------------2" << endl;
-						cin >> conf;
+						
+						try {
+							cin >> conf;
+							if (conf < 1 || conf > 2) {
+								OFBOpcoes o;
+								throw o;
+								}
+							}
+						catch (OpcoesExc) {
+							cout << "Opção invalida" << endl;
+							pause();
+							clear();
+							menu();
+						}
+							
 						cin.ignore(1000, '\n');
 					}
 				} while (conf != 1);
@@ -1189,13 +1217,41 @@ void Empresa::menu() {
 					}
 
 					cout << "Qual o servico que deseja remover?" << endl;
-					cin >> serv;
+					try {
+						cin >> serv;
+						if(serv < 1 || serv > standards.size()) {
+							ServInvalido si;
+							throw si;
+						}
+					}
+					catch (ServicosExc) {
+						cout << "Tentou remover serviço inexistente" << endl;
+						pause();
+						clear();
+						menu();
+					}
+					
+					
 					cin.ignore(1000, '\n');
 					cout << "Tem a certeza que quer remover o Servico "
 							<< standards[serv - 1]->getNome() << endl;
 					cout << "Sim----------------1" << endl;
 					cout << "Nao----------------2" << endl;
-					cin >> conf;
+					
+					try {
+						cin >> conf;
+						if(conf < 1 || conf > 2) {
+							OFBOpcoes o;
+							throw o;
+						}
+					}
+					catch (OpcoesExc) {
+						cout << "Opção Invalida" << endl;
+						pause();
+						clear();				
+						menu();
+					}
+					
 					if (conf == 1) {
 						removeStandard(serv - 1);
 
@@ -1203,8 +1259,20 @@ void Empresa::menu() {
 						cout << "Deseja eliminar outro servico?" << endl;
 						cout << "Nao----------------1" << endl;
 						cout << "Sim----------------2" << endl;
-						cin >> conf;
-
+						
+						try {
+							cin >> conf;
+							if(conf < 1 || conf > 2) {
+								OFBOpcoes o;
+								throw o;
+							}
+						}
+						catch (OpcoesExc) {
+							cout << "Opção Invalida" << endl;
+							pause();
+							clear();				
+							menu();
+						}
 					}
 				} while (conf != 1);
 			}
@@ -1224,7 +1292,22 @@ void Empresa::menu() {
 				}
 
 				cout << "Qual o servico que deseja analisar?" << endl;
-				cin >> opcao;
+				
+				try{
+					cin >> opcao;
+					if(opcao < 1 || opcao > standards.size()){
+						ServInvalido si;
+						throw si;
+					}
+				}
+				catch (ServicosExc) {
+					cout << "Serviço Inexistente" << endl;
+					pause();
+					clear();
+					menu();
+				}
+				
+				
 				cin.ignore(1000, '\n');
 
 				cout << *(standards[opcao - 1]) << endl;
@@ -1239,12 +1322,39 @@ void Empresa::menu() {
 				for (unsigned int i = 0; i < veiculos.size(); i++) {
 					cout << i + 1 << "  " << veiculos[i]->getMarca() << endl;
 				}
-				cin >> opcao;
+				
+				try {
+					cin >> opcao;
+					if(opcao < 1 || opcao > veiculos.size()){
+						VeicInvalido vi;
+						throw vi;
+					}
+				}
+				catch (VeicExc){
+					cout << "Veiculo Invalido" << endl;
+					pause();
+					clear();
+					menu();
+				}
 
 				cout << "Deseja acrescentar um servico standart " << endl;
 				cout << "Sim----------------1" << endl;
 				cout << "Nao----------------2" << endl;
-				cin >> opcao2;
+				
+				try {
+					cin >> opcao2;
+					if(opcao2 < 1 || opcao2 > 2) {
+						OFBOpcoes o;
+						throw o;
+					}
+				}
+				catch (OpcoesExc) {
+					cout << "Opcao Invalida" << endl;
+					pause();
+					clear();
+					menu();
+				}
+				
 				cin.ignore(1000, '\n');
 
 				if (opcao2 == 1) {
@@ -1253,23 +1363,77 @@ void Empresa::menu() {
 						cout << i + 1 << "  " << standards[i]->getNome()
 								<< endl;
 					}
-					cin >> opcao3;
+					
+					try {
+						cin >> opcao3;
+						if(opcao3 < 1 || opcao3 > standards.size()) {
+							ServInvalido si;
+							throw si;
+						}
+					}
+					catch (ServicosExc){
+						cout << "Servico Invalido" << endl;
+						pause();
+						clear();
+						menu();
+					}
+						
+						
 					veiculos[opcao - 1]->novoStandard(standards[opcao3 - 1]);
 				} else if (opcao2 == 2) {
 					int conf;
 					do {
+					  try {
 						cout << "Insira data de inicio (XX-XX-XX)" << endl;
 						getline(cin, datai);
+						if(datai.size() > 5){
+							DataIniExc di;
+							throw di;
+						}
+						
 						cout << "Insira data de fim (XX-XX-XX)" << endl;
 						getline(cin, dataf);
+						if(dataf.size() > 5){
+							DataFimExc df;
+							throw df;
+						}
+						
 						cout << "Insira nome do servico" << endl;
 						getline(cin, nome);
+						if(nome.size() > 5){
+							NomServExc ns;
+							throw ns;
+						}
+						
 						cout << "Insira descricao do servico" << endl;
 						getline(cin, descricao);
+						if(descricao.size() > 5) {
+							DescServExc ds;
+							throw ds;
+						}
+						
 						cout << "Insira preco por hora do servico" << endl;
 						getline(cin, precoe);
+						if(precoe.size()) {
+							PrecoServExc ps;
+							throw ps;
+						}
+						
 						cout << "Insira duracao do servico" << endl;
 						getline(cin, duracaoe);
+						if(duracaoe.size()) {
+							DuracaoServExc ds;
+							throw ds;
+						}
+					}					
+					catch (ServicosExc){
+							cout << "String overflow" << endl;
+							pause();
+							clear();
+							menu();
+						}
+						
+						
 						preco = atof(precoe.c_str());
 						duracao = atof(duracaoe.c_str());
 						Standard *s = new Standard(nome, descricao, preco,
@@ -1277,7 +1441,21 @@ void Empresa::menu() {
 						cout << "Servico bem criado?" << endl;
 						cout << "Sim----------------1" << endl;
 						cout << "Nao----------------2" << endl;
-						cin >> conf;
+						
+						try{
+							cin >> conf;
+							if(conf < 1 || conf > 2){
+								OFBOpcoes o;
+								throw o;
+							}
+						}
+						catch (OpcoesExc){
+							cout << "Opção Invalida" << endl;
+							pause();
+							clear();
+							menu();
+						}
+						
 						if (conf == 1) {
 							veiculos[opcao - 1]->novoStandard(s);
 
@@ -1285,7 +1463,21 @@ void Empresa::menu() {
 							cout << "Deseja repetir os dados?" << endl;
 							cout << "Nao----------------1" << endl;
 							cout << "Sim----------------2" << endl;
-							cin >> conf;
+							
+							try{
+								cin >> conf;
+								if(conf < 1 || conf > 2){
+									OFBOpcoes o;
+									throw o;
+								}
+							}
+							catch (OpcoesExc){
+								cout << "Opção Invalida" << endl;
+								pause();
+								clear();
+								menu();
+							}
+							
 							cin.ignore(1000, '\n');
 						}
 					} while (conf != 1);
@@ -1319,7 +1511,21 @@ void Empresa::modificaFunc() {
 	}
 
 	cout << "Qual o funcionario que deseja modificar" << endl;
-	cin >> numeracao;
+	
+	try {
+		cin >> numeracao;
+		if(numeracao < 1 || numeracao > funcionarios.size()){
+			FuncionarioInvalido fi;
+			throw fi;
+		}
+	}
+	catch (FuncionarioOFB) {
+		cout << "Funcionario não existente" << endl;
+		pause();
+		clear();
+		menu();
+	}
+		
 	cin.ignore(1000, '\n');
 
 	clear();
@@ -1334,76 +1540,171 @@ void Empresa::modificaFunc() {
 	cout << "Especializacao-----6" << endl;
 	cout << "Alterar Veiculos---7" << endl;
 	cout << "Sair---------------0" << endl;
-	cin >> conf;
+	
+	try {
+		cin >> conf;
+		if(conf < 0 || conf > 7){
+			OFBOpcoes o;
+			throw o;
+		}
+	}
+	catch (OpcoesExc) {
+		cout << "Opção Invalida" << endl;
+		pause();
+		clear();
+		menu();
+	}
+	
 	cin.ignore(1000, '\n');
 
 	switch (conf) {
-
+		
 	case 1: {
-		clear();
+	  try{
+		clear();	
 		string nome;
 		cout << "Qual o novo nome?" << endl;
 		getline(cin, nome);
+			if(nome.size() > 5) {
+				fNomeOFB n;
+				throw n;
+			}
+			
 		funcionarios[numeracao - 1]->setNome(nome);
 		cout << "Nome alterado com sucesso" << endl;
 		pause();
 	}
+		catch (FuncionarioOFB){
+			cout << "String overflow" << endl;
+			pause();
+			clear();
+			menu(); 
+		}
+			
+		
+	}
 		break;
 
 	case 2: {
+	  try {
 		clear();
 		string contacto;
 		cout << "Qual o novo contacto?" << endl;
 		getline(cin, contacto);
+		if(contacto.size() > 5) {
+			fContactoOFB c;
+			throw c;
+		}
 		funcionarios[numeracao - 1]->setContacto(contacto);
 		cout << "Contacto alterado com sucesso" << endl;
 		pause();
 	}
+		catch (FuncionarioOFB){
+			cout << "String overflow" << endl;
+			pause();
+			menu();
+			clear(); 
+		}
+	 	
+		
+	}
 		break;
 	case 3: {
+	 try {
 		clear();
 		string morada;
 		cout << "Qual a nova morada?" << endl;
 		getline(cin, morada);
+		if(morada.size() > 5) {
+			fMoradaOFB m;
+			throw m;
+		}
 		funcionarios[numeracao - 1]->setMorada(morada);
 		cout << "Morada alterada com sucesso" << endl;
 		pause();
 	}
+		catch (FuncionarioOFB){
+			cout << "String overflow" << endl;
+			pause();
+			clear();
+			menu(); 
+		}
+		
+	}
 		break;
 	case 4: {
+	  try {
 		clear();
 		string temp;
 		int horasEx;
 		cout << "Qual o numero das horas extra?" << endl;
 		getline(cin, temp);
+		if(temp.size() > 5) {
+			fHorasExtraOFB h;
+			throw h;
+		}
 		horasEx = atoi(temp.c_str());
 		funcionarios[numeracao - 1]->setHorasExtra(horasEx);
 		cout << "Horas extra alteradas com sucesso" << endl;
 		pause();
 	}
+		catch (FuncionarioOFB){
+			cout << "String overflow" << endl; 
+			pause();
+			menu();
+			clear();
+		}
+			
+	}
 		break;
 	case 5: {
+	  try {
 		clear();
 		string temp;
 		int salario;
 		cout << "Qual o novo salario?" << endl;
 		getline(cin, temp);
+		if(temp.size()){
+			fSalarioOFB s;
+			throw s;
+		}
 		salario = atoi(temp.c_str());
 		funcionarios[numeracao - 1]->setSalario(salario);
 		cout << "Salario alterado com sucesso" << endl;
 		pause();
 	}
+		catch (FuncionarioOFB){
+			cout << "String overflow" << endl; 
+			pause();
+			menu();
+			clear();
+		}
+		
+	}
 		break;
 	case 6: {
+	  try {
 		clear();
 		string especializacao;
 		cout << "Qual a nova especializacao?" << endl;
 		getline(cin, especializacao);
+		if(especializacao.size() > 5){
+			fEspecOFB esp;
+			throw esp;
+		}
 		funcionarios[numeracao - 1]->setTipo(especializacao);
 		cout << "Especializacao alterada com sucesso" << endl;
 		pause();
 	}
+		catch (FuncionarioOFB){
+			cout << "String overflow" << endl; 
+			pause();
+			menu();
+			clear();
+		}
+	}
 		break;
+	//TODO A partir daqui :(	
 	case 7: {
 		clear();
 		int opcao, nrvei;

@@ -27,6 +27,8 @@ class fMoradaOFB: public FuncionarioOFB{};
 class fTipoOFB: public FuncionarioOFB{};
 class fSalarioOFB: public FuncionarioOFB{};
 class FuncionarioInvalido: public FuncionarioOFB{};
+class fHorasExtraOFB: public FuncionarioOFB{};
+class fEspecOFB: public FuncionarioOFB{};
 //Excepções menu Cliente
 class ClienteOFB {};
 class cNomeOFB: public ClienteOFB {};
@@ -41,8 +43,12 @@ class NomServExc: public ServicosExc {};
 class DescServExc: public ServicosExc {};
 class PrecoServExc: public ServicosExc {};
 class DuracaoServExc: public ServicosExc {};
+class ServInvalido: public ServicosExc {};
 //Excepções Opcões
 class OpcoesExc {};
 class OFBOpcoes: public OpcoesExc {}; //Opcao out of bounds
+//Excepções Veiculos
+class VeicExc {};
+class VeicInvalido: public VeicExc {};
 
 #endif /* EXCEPTION_H_ */
