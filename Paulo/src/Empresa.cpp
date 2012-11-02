@@ -2320,7 +2320,18 @@ void Empresa::menuVeiculos() {
 		cout << "Buses-----------------3" << endl;
 		cout << "Todos-----------------4" << endl;
 		cout << "Sair------------------0" << endl;
-		cin >> op;
+		
+		try {
+			cin >> op;
+			if(op < 0 || op > 4){
+				OFBOpcoes o;
+				throw o;
+			}
+		}
+		catch (OpcoesExc){
+			cout << "Opção invalida" << endl;
+		}
+			
 		cin.ignore(1000, '\n');
 
 		switch (op) {
@@ -2330,7 +2341,20 @@ void Empresa::menuVeiculos() {
 				cout << i + 1 << "  " << carros[i]->getMarca() << endl;
 			}
 			cout << "Que carro deseja analizar?" << endl;
-			cin >> car;
+			try {
+				cin >> car;
+				if(car < 1 || car > carros.size()) {
+					CarInvalido ci;
+					throw ci;
+				}
+			}
+			catch (VeicExc){
+				cout << "Carro inexistente" << endl;
+				pause();
+				clear();
+				menu();
+			}
+				
 			cin.ignore(1000, '\n');
 
 			cout << *(carros[car - 1]) << endl;
@@ -2345,7 +2369,21 @@ void Empresa::menuVeiculos() {
 				cout << i + 1 << "  " << camioes[i]->getMarca() << endl;
 			}
 			cout << "Que camiao deseja analizar?" << endl;
-			cin >> car;
+					
+			try {
+				cin >> car;
+				if(car < 1 || car > camioes.size()) {
+					CamiaoInvalido ti;
+					throw ti;
+				}
+			}
+			catch (VeicExc){
+				cout << "Camião inexistente" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			cin.ignore(1000, '\n');
 			cout << *(camioes[car - 1]) << endl;
 			listaVeiculosServicos(camioes[car - 1]);
@@ -2359,7 +2397,21 @@ void Empresa::menuVeiculos() {
 				cout << i + 1 << "  " << buses[i]->getMarca() << endl;
 			}
 			cout << "Que bus deseja analizar?" << endl;
-			cin >> car;
+			
+			try {
+				cin >> car;
+				if(car < 1 || car > buses.size()) {
+					BusInvalido bi;
+					throw bi;
+				}
+			}
+			catch (VeicExc){
+				cout << "Bus inexistente" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			cin.ignore(1000, '\n');
 			cout << *(buses[car - 1]) << endl;
 			listaVeiculosServicos(buses[car - 1]);
@@ -2374,7 +2426,22 @@ void Empresa::menuVeiculos() {
 				cout << i + 1 << "  " << veiculos[i]->getMarca() << endl;
 			}
 			cout << "Que veiculo deseja analizar?" << endl;
-			cin >> car;
+			
+			try {
+				cin >> car;
+				if(car < 1 || car > veiculos.size()){
+					VeicInvalido vi;
+					throw vi;
+				}
+			}
+			catch (VeicExc){
+				cout << "Veiculo inexistente" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
+			
 			cin.ignore(1000, '\n');
 			cout << *(veiculos[car - 1]) << endl;
 			pause();
