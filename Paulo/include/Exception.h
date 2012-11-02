@@ -26,6 +26,7 @@ class fContactoOFB: public FuncionarioOFB{};
 class fMoradaOFB: public FuncionarioOFB{};
 class fTipoOFB: public FuncionarioOFB{};
 class fSalarioOFB: public FuncionarioOFB{};
+class FuncionarioInvalido: public FuncionarioOFB{};
 //Excepções menu Cliente
 class ClienteOFB {};
 class cNomeOFB: public ClienteOFB {};

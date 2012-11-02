@@ -600,7 +600,7 @@ void Empresa::menu() {
 			try{	
 				cin >> opF;
 				
-					if(opF < 0 && opF > 6) {
+					if(opF < 0 || opF > 6) {
 						OFBOpcoes ofb;
 						throw ofb;
 					}
@@ -676,7 +676,7 @@ void Empresa::menu() {
 					cout << "Nao----------------------2" << endl;
 					try {
 						cin >> confirmacao;
-						if(confirmacao < 1 && confirmacao > 2) {
+						if(confirmacao < 1 || confirmacao > 2) {
 							OFBOpcoes of;
 							throw of;
 						}
@@ -694,7 +694,20 @@ void Empresa::menu() {
 						cout << "Deseja inserir os dados de novo?" << endl;
 						cout << "Nao-----------1" << endl;
 						cout << "Sim-----------2" << endl;
+						
+						try {
 						cin >> confirmacao;
+						if(confirmacao < 1 || confirmacao > 2) {
+							OFBOpcoes of;
+							throw of;
+							}
+						}
+						catch (OpcoesExc) {
+							cout << "Opção Invalida" << endl;
+							pause();
+							clear();
+							menu();
+						}	
 						cin.ignore(1000, '\n');
 					}
 
@@ -710,9 +723,22 @@ void Empresa::menu() {
 						cout << i + 1 << "   " << funcionarios[i]->getNome()
 								<< endl;
 					}
-
+	//TODO excepcao remover
 					cout << "Qual dos funcionarios deseja eliminar?" << endl;
-					cin >> numeracao;
+					
+					try {
+						cin >> numeracao;
+						if(numeracao < 1 || numeracao > funcionarios.size()) {
+							FuncionarioInvalido iv;
+							throw iv;
+						}
+					}
+					catch (FuncionarioOFB){
+							cout << "Funcionario que deseja remover não existe" << endl;
+							pause();
+							clear();
+							menu();
+						}
 
 					clear();
 					cout << *(funcionarios[numeracao - 1]) << endl;
@@ -722,7 +748,20 @@ void Empresa::menu() {
 							<< endl;
 					cout << "Nao --------------------------------------2"
 							<< endl;
-					cin >> conf;
+					try {
+						cin >> conf;
+						if(conf < 1 || conf > 2){
+							OFBOpcoes o;
+							throw o;
+						}
+					}
+					catch (OpcoesExc){
+						cout << "Opcao Invalida" << endl;
+						pause();
+						clear();
+						menu();
+					}
+						
 					if (conf == 1) {
 						removeFuncionario(numeracao - 1);
 						cout << "Funcionario apagado do sistema" << endl;
@@ -732,7 +771,20 @@ void Empresa::menu() {
 						cout << "Deseja inserir os dados de novo?" << endl;
 						cout << "Nao-----------1" << endl;
 						cout << "Sim-----------2" << endl;
+						
+					try {
 						cin >> conf;
+						if(conf < 1 || conf > 2){
+							OFBOpcoes o;
+							throw o;
+						}
+					}
+					catch (OpcoesExc){
+							cout << "Opcao Invalida" << endl;
+							pause();
+							clear();
+							menu();
+						}
 
 					}
 				} while (conf != 1);
@@ -752,9 +804,22 @@ void Empresa::menu() {
 					cout << i + 1 << "   " << funcionarios[i]->getNome()
 							<< endl;
 				}
-
+//TODO excepcao listar
 				cout << "Qual dos funcionarios deseja examinar?" << endl;
+			try {
 				cin >> numeracao;
+				
+				if(numeracao > 1 || numeracao < funcionarios.size()) {
+					FuncionarioInvalido iv;
+					throw iv;
+				}
+			}
+			catch (FuncionarioOFB) {
+				cout << "Funcionario não existente" << endl;
+				pause();
+				clear();
+				menu();
+			}
 
 				cout << *(funcionarios[numeracao - 1]) << endl;
 				pause();
@@ -787,7 +852,7 @@ void Empresa::menu() {
 			try {
 				cin >> opC;
 				
-				if(opC < 0 && opC > 4) {
+				if(opC < 0 || opC > 4) {
 					OFBOpcoes of;
 					throw of;
 				}
@@ -844,7 +909,18 @@ void Empresa::menu() {
 					cout << "Confirma os dados?" << endl;
 					cout << "Sim-----------1" << endl;
 					cout << "Nao-----------2" << endl;
-					cin >> confirmacao;
+					
+					try {
+						cin >> confirmacao;
+						if(confirmacao < 1 || confirmacao > 2) {
+							OFBOpcoes o;
+							throw o;
+						}
+					}
+					catch(OpcoesExc) {
+						cout << "Opçao Invalida" << endl;
+					}
+											
 					cin.ignore(1000, '\n');
 
 					if (confirmacao == 1) {
@@ -855,7 +931,17 @@ void Empresa::menu() {
 						cout << "Deseja inserir os dados de novo?" << endl;
 						cout << "Nao-----------1" << endl;
 						cout << "Ŝim-----------2" << endl;
-						cin >> confirmacao;
+						
+						try {
+							cin >> confirmacao;
+							if(confirmacao < 1 || confirmacao > 2) {
+								OFBOpcoes o;
+								throw o;
+							}
+						}
+						catch(OpcoesExc) {
+							cout << "Opçao Invalida" << endl;
+						}
 
 						pause();
 					}
@@ -875,7 +961,20 @@ void Empresa::menu() {
 					}
 
 					cout << "Qual dos clientes deseja eliminar?" << endl;
-					cin >> numeracao;
+				try {
+						cin >> numeracao;
+						if(numeracao < 1 || numeracao > clientes.size()) {
+							ClienteInvalido iv;
+							throw iv;
+						}
+					}
+				catch (ClienteOFB) {
+					cout << "Tentou remover cliente não existente" << endl;
+					pause();
+					clear();
+					menu();
+				}
+						
 					cin.ignore(1000, '\n');
 
 					clear();
@@ -886,7 +985,20 @@ void Empresa::menu() {
 							<< endl;
 					cout << "Nao --------------------------------------------2"
 							<< endl;
-					cin >> conf;
+					try {		
+						cin >> conf;
+						if(conf < 1 || conf > 2) {
+							OFBOpcoes o;
+							throw o;
+						}
+					}
+					catch (OpcoesExc) {
+						cout << "Opção Invalida" << endl;
+						pause();
+						clear();
+						menu();
+					} 
+						
 					cin.ignore(1000, '\n');
 
 					if (conf == 1) {
@@ -921,7 +1033,7 @@ void Empresa::menu() {
 				try {
 					cin >> opcao;
 					
-					if(opcao < 1 && opcao > clientes.size()) {
+					if(opcao < 1 || opcao > clientes.size()) {
 						ClienteInvalido inv;
 						throw inv;
 					}
