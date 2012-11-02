@@ -2471,7 +2471,21 @@ void Empresa::modificaVeic() {
 	cout << "Camiao----------------------------2" << endl;
 	cout << "Bus-------------------------------3" << endl;
 	cout << "Sair------------------------------0" << endl;
-	cin >> indice;
+	
+	try {
+		cin >> indice;
+		if(indice < 0 || indice > 3){
+			OFBOpcoes o;
+			throw o;
+		}
+	}
+	catch (OpcoesExc) {
+		cout << "Opção invalida" << endl;
+		pause();
+		clear();
+		menu();
+	}
+				
 	cin.ignore(1000, '\n');
 
 	switch (indice) {
@@ -2482,7 +2496,20 @@ void Empresa::modificaVeic() {
 			cout << i + 1 << "   " << carros[i]->getMarca() << endl;
 		}
 		cout << "Insira carro que deseja alterar" << endl;
-		cin >> nCarro;
+		try {
+			cin >> nCarro;
+			if(nCarro < 1 || nCarro > carros.size()) {
+				CarInvalido ci;
+				throw ci;
+			}
+		}
+		catch (VeicExc) {
+			cout << "Carro inexistente" << endl;
+			pause();
+			clear();
+			menu();		
+		}
+			
 		cin.ignore(1000, '\n');
 
 		cout << "Que atributo deseja alterar?" << endl;
@@ -2491,7 +2518,22 @@ void Empresa::modificaVeic() {
 		cout << "Matricula--------------------3" << endl;
 		cout << "Categoria--------------------4" << endl;
 		cout << "Sair-------------------------0" << endl;
-		cin >> op;
+		
+		try {
+			cin >> op;
+			if(op < 0 || op > 4){
+				OFBOpcoes o;
+				throw o;
+			}
+		}
+		catch (OpcoesExc){
+			cout << "Opção invalida" << endl;
+			pause();
+			clear();
+			menu();
+		}
+		
+		
 		cin.ignore(1000, '\n');
 
 		clear();
@@ -2500,6 +2542,19 @@ void Empresa::modificaVeic() {
 		case 1: {
 			cout << "Insira nova marca" << endl;
 			getline(cin, marca);
+			try{
+				if(marca.size() > 5) {
+					CarMarcaExc cm;
+					throw cm;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			carros[nCarro - 1]->setMarca(marca);
 
 		}
@@ -2507,18 +2562,57 @@ void Empresa::modificaVeic() {
 		case 2: {
 			cout << "Insira novo modelo" << endl;
 			getline(cin, modelo);
+			try{
+				if(modelo.size() > 5) {
+					CarMarcaExc cmd;
+					throw cmd;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			carros[nCarro - 1]->setMarca(modelo);
 		}
 			break;
 		case 3: {
 			cout << "Insira nova matricula" << endl;
 			getline(cin, matricula);
+			try{
+				if(matricula.size() > 5) {
+					CarMatrExc cmt;
+					throw cmt;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			carros[nCarro - 1]->setMatricula(matricula);
 		}
 			break;
 		case 4: {
 			cout << "Insira nova categoria" << endl;
 			getline(cin, categoria);
+			try{
+				if(categoria.size() > 5) {
+					CarCategoriaExc cg;
+					throw cg;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			camioes[nCarro - 1]->setCategoria(categoria);
 		}
 			break;
@@ -2537,7 +2631,21 @@ void Empresa::modificaVeic() {
 			cout << i + 1 << "   " << camioes[i]->getMarca() << endl;
 		}
 		cout << "Insira camiao que deseja alterar" << endl;
-		cin >> nCarro;
+		
+		try {
+			cin >> nCarro;
+			if(nCarro < 1 || nCarro > camioes.size()) {
+				CamiaoInvalido ti;
+				throw ti;
+			}
+		}
+		catch (VeicExc) {
+			cout << "Camiao inexistente" << endl;
+			pause();
+			clear();
+			menu();
+		}
+		
 		cin.ignore(1000, '\n');
 
 		cout << "Que atributo deseja alterar?" << endl;
@@ -2546,7 +2654,21 @@ void Empresa::modificaVeic() {
 		cout << "Matricula--------------------3" << endl;
 		cout << "Categoria--------------------4" << endl;
 		cout << "Sair-------------------------0" << endl;
-		cin >> op;
+		
+		try {
+			cin >> op;
+			if(op < 0 || op > 4) {
+				OFBOpcoes o;
+				throw o;
+			}
+		}
+		catch (OpcoesExc) {
+			cout << "Opção Invalida" << endl;
+			pause();
+			clear();
+			menu();
+		}
+		
 		cin.ignore(1000, '\n');
 
 		clear();
@@ -2554,6 +2676,16 @@ void Empresa::modificaVeic() {
 		case 1: {
 			cout << "Insira nova marca" << endl;
 			getline(cin, marca);
+			try{
+				if(marca.size() > 5){
+					CamiaoMarcaExc cm;
+					throw cm;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+			}
+			
 			camioes[nCarro - 1]->setMarca(marca);
 
 		}
@@ -2561,18 +2693,48 @@ void Empresa::modificaVeic() {
 		case 2: {
 			cout << "Insira novo modelo" << endl;
 			getline(cin, modelo);
+			try{
+				if(modelo.size() > 5){
+					CamiaoModeloExc cmd;
+					throw cmd;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+			}
+			
 			camioes[nCarro - 1]->setMarca(modelo);
 		}
 			break;
 		case 3: {
 			cout << "Insira nova matricula" << endl;
 			getline(cin, matricula);
+			try{
+				if(matricula.size() > 5){
+					CamiaoMatrExc cmt;
+					throw cmt;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+			}
+			
 			camioes[nCarro - 1]->setMatricula(matricula);
 		}
 			break;
 		case 4: {
 			cout << "Insira nova categoria" << endl;
 			getline(cin, categoria);
+			try{
+				if(categoria.size() > 5){
+					CamiaoCategoriaExc cg;
+					throw cg;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+			}
+			
 			camioes[nCarro - 1]->setCategoria(categoria);
 		}
 			break;
