@@ -2881,7 +2881,20 @@ void Empresa::modificaServ() {
 	double preco, duracao;
 
 	cout << "Qual dos servicos deseja alterar?" << endl;
-	cin >> escolha;
+	try {
+		cin >> escolha;
+		if(escolha < 1 || escolha > standards.size()) {
+			ServInvalido si;
+			throw si;
+		}
+	}
+	catch (ServicosExc) {
+		cout << "Servico Inixestente" << endl;
+		pause();
+		clear();
+		menu();
+	}
+		
 	cin.ignore(1000, '\n');
 
 	cout << "Que atributo deseja alterar?" << endl;
@@ -2892,7 +2905,21 @@ void Empresa::modificaServ() {
 	cout << "Preco por hora---------------------5" << endl;
 	cout << "Duracao----------------------------6" << endl;
 	cout << "Sair-------------------------------0" << endl;
-	cin >> opS;
+	
+	try {
+		cin >> opS;
+		if(opS < 0 || opS > 6) {
+			OFBOpcoes o;
+			throw o;
+		}
+	}
+	catch (OpcoesExc) {
+		cout << "Opção invalida" << endl;
+		pause();
+		clear();
+		menu();
+	}
+		
 	cin.ignore(1000, '\n');
 
 	clear();
@@ -2901,6 +2928,19 @@ void Empresa::modificaServ() {
 	case 1: {
 		cout << "Insira nova Data de inicio " << endl;
 		getline(cin, dataI);
+		try {
+			if(dataI.size() > 5) {
+				DataIniExc di;
+				throw di;
+			}
+		}
+		catch (ServicosExc) {
+			cout << "String overflow" << endl;
+			pause();
+			clear();
+			menu();
+		}
+		
 		standards[escolha - 1]->setDataInicio(dataI);
 
 	}
@@ -2909,6 +2949,19 @@ void Empresa::modificaServ() {
 	case 2: {
 		cout << "Insira nova Data de fim " << endl;
 		getline(cin, dataF);
+		try {
+			if(dataF.size() > 5) {
+				DataFimExc df;
+				throw df;
+			}
+		}
+		catch (ServicosExc) {
+			cout << "String overflow" << endl;
+			pause();
+			clear();
+			menu();
+		}
+		
 		cin.ignore(1000, '\n');
 		standards[escolha - 1]->setDataFim(dataF);
 	}
@@ -2917,6 +2970,19 @@ void Empresa::modificaServ() {
 	case 3: {
 		cout << "Insira novo Nome " << endl;
 		getline(cin, nome);
+		try {
+			if(nome.size() > 5) {
+				NomServExc ns;
+				throw ns;
+			}
+		}
+		catch (ServicosExc) {
+			cout << "String overflow" << endl;
+			pause();
+			clear();
+			menu();
+		}
+		
 		cin.ignore(1000, '\n');
 		standards[escolha - 1]->setNome(nome);
 	}
@@ -2925,6 +2991,19 @@ void Empresa::modificaServ() {
 	case 4: {
 		cout << "Insira nova Descricao " << endl;
 		getline(cin, descricao);
+		try {
+			if(descricao.size() > 5) {
+				DescServExc ds;
+				throw ds;
+			}
+		}
+		catch (ServicosExc) {
+			cout << "String overflow" << endl;
+			pause();
+			clear();
+			menu();
+		}
+		
 		cin.ignore(1000, '\n');
 		standards[escolha - 1]->setDescricao(descricao);
 	}
@@ -2933,6 +3012,19 @@ void Empresa::modificaServ() {
 	case 5: {
 		cout << "Insira novo Preco " << endl;
 		getline(cin, precoe);
+		try {
+			if(dataI.size() > 5) {
+				PrecoServExc ps;
+				throw ps;
+			}
+		}
+		catch (ServicosExc) {
+			cout << "String overflow" << endl;
+			pause();
+			clear();
+			menu();
+		}
+		
 		cin.ignore(1000, '\n');
 		preco = atof(precoe.c_str());
 		standards[escolha - 1]->setPreco(preco);
@@ -2942,6 +3034,19 @@ void Empresa::modificaServ() {
 	case 6: {
 		cout << "Insira nova Duracao (Em horas) " << endl;
 		getline(cin, duracaoe);
+		try {
+			if(duracaoe.size() > 5) {
+				DuracaoServExc dse;
+				throw dse;
+			}
+		}
+		catch (ServicosExc) {
+			cout << "String overflow" << endl;
+			pause();
+			clear();
+			menu();
+		}
+		
 		cin.ignore(1000, '\n');
 		duracao = atof(duracaoe.c_str());
 		standards[escolha - 1]->setDuracao(duracao);
