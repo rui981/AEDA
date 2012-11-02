@@ -2064,12 +2064,63 @@ void Empresa::menuVeiculos() {
 			clear();
 			cout << "Insira marca" << endl;
 			getline(cin, marca);
+			try {
+				if(marca.size() > 5){
+					CamiaoMarcaExc cm;
+					throw cm;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			cout << "Insira modelo" << endl;
 			getline(cin, modelo);
+			try {
+				if(modelo.size() > 5){
+					CamiaoModeloExc cmd;
+					throw cmd;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+				
 			cout << "Insira Matricula (XX-XX-XX)" << endl;
 			getline(cin, matricula);
+			try {
+				if(matricula.size() > 5){
+					CamiaoMatrExc cmt;
+					throw cmt;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			cout << "Insira categoria" << endl;
 			getline(cin, tipo);
+			try {
+				if(tipo.size() > 5){
+					CamiaoCategoriaExc cg;
+					throw cg;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
 
 			Camiao *c = new Camiao(marca, modelo, matricula, tipo);
 			veiculos.push_back(c);
@@ -2079,15 +2130,54 @@ void Empresa::menuVeiculos() {
 		}
 			break;
 
-		case 3: {
+		case 3: { //Bus
 
 			clear();
 			cout << "Insira marca" << endl;
 			getline(cin, marca);
+			try {
+				if(marca.size() > 5) {
+					BusMarcaExc bm;
+					throw bm;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			cout << "Insira modelo" << endl;
 			getline(cin, modelo);
+			try {
+				if(modelo.size() > 5) {
+					BusModeloExc bmd;
+					throw bmd;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			cout << "Insira Matricula (XX-XX-XX)" << endl;
 			getline(cin, matricula);
+			try {
+				if(matricula.size() > 5) {
+					BusMatrExc bmt;
+					throw bmt;
+				}
+			}
+			catch (VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			Bus *b = new Bus(marca, modelo, matricula);
 			veiculos.push_back(b);
 			novoBus(b);
@@ -2099,7 +2189,7 @@ void Empresa::menuVeiculos() {
 
 	}
 		break;
-
+//TODO Tou aqui!
 	case 2: {
 		clear();
 		int opcao, temp;

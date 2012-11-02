@@ -55,6 +55,14 @@ class CarMarcaExc: public VeicExc {};
 class CarModeloExc: public VeicExc {};
 class CarMatrExc: public VeicExc {};
 class CarCategoriaExc: public VeicExc {};
-
+//Camiões
+class CamiaoMarcaExc: public VeicExc {};
+class CamiaoModeloExc: public VeicExc {};
+class CamiaoMatrExc: public VeicExc {};
+class CamiaoCategoriaExc: public VeicExc {};
+//Bus
+class BusMarcaExc: public VeicExc {};
+class BusModeloExc: public VeicExc {};
+class BusMatrExc: public VeicExc {};
 
 #endif /* EXCEPTION_H_ */
