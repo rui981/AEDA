@@ -526,15 +526,12 @@ void Empresa::leStandards() {
 		while (!file.eof()) {
 
 			getline(file, nome);
-			if (nome == " ")
-				return;
-
 			getline(file, descricao);
 			getline(file, duracaoe);
 			getline(file, precoe);
 			getline(file, dataI);
 			getline(file, dataF);
-
+		
 			duracao = atof(duracaoe.c_str());
 			preco = atof(precoe.c_str());
 
@@ -580,7 +577,9 @@ void Empresa::menu() {
 			cout << "Opção Invalida" << endl;
 			pause();
 			clear();
-			menu();
+			//break;		
+			//menu();
+			//exit(-1);
 		}
 
 		
@@ -605,10 +604,12 @@ void Empresa::menu() {
 						throw ofb;
 					}
 				}
+			//Fix me break
 			catch (OpcoesExc) {
 				cout << "Opçao invalida" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			} 
 								
@@ -641,6 +642,7 @@ void Empresa::menu() {
 					cout << "Insira morada de Funcionario" << endl;
 					getline(cin, morada);
 					if(morada.size() > 5){
+						//TODO size de cada coisa 
 						fMoradaOFB mb;
 						throw mb;
 						}
@@ -652,6 +654,7 @@ void Empresa::menu() {
 						}
 					cout << "Insira salario de Funcionario" << endl;
 					getline(cin, salarioe);
+					
 					if(salarioe.size() > 5){
 						fSalarioOFB sb;
 						throw sb;
@@ -661,10 +664,24 @@ void Empresa::menu() {
 						cout << "String Overflow.... A relançar menu" << endl;
 						pause();
 						clear();
+						break;
 						menu();
 					}
-									
+					
+				try{					
 					salario = atof(salarioe.c_str());
+					if(salario <= 0) {
+						fSalarioOFB fs;
+						throw fs;
+					}
+				}
+				catch(FuncionarioOFB){
+					cout << "Salario Invalido" << endl;
+					pause();
+					clear();
+					break;
+					menu();
+				}
 
 					Funcionario * funcTemp = new Funcionario(nome, contacto,
 							morada, tipo, salario, horasExtra);
@@ -685,6 +702,7 @@ void Empresa::menu() {
 						cout << "Opção Invalida" << endl;
 						pause();
 						clear();
+						break;
 						menu();
 					}
 						
@@ -706,6 +724,7 @@ void Empresa::menu() {
 							cout << "Opção Invalida" << endl;
 							pause();
 							clear();
+							break;
 							menu();
 						}	
 						cin.ignore(1000, '\n');
@@ -723,7 +742,6 @@ void Empresa::menu() {
 						cout << i + 1 << "   " << funcionarios[i]->getNome()
 								<< endl;
 					}
-	//TODO excepcao remover
 					cout << "Qual dos funcionarios deseja eliminar?" << endl;
 					
 					try {
@@ -737,6 +755,7 @@ void Empresa::menu() {
 							cout << "Funcionario que deseja remover não existe" << endl;
 							pause();
 							clear();
+							break;
 							menu();
 						}
 
@@ -759,6 +778,7 @@ void Empresa::menu() {
 						cout << "Opcao Invalida" << endl;
 						pause();
 						clear();
+						break;
 						menu();
 					}
 						
@@ -783,6 +803,7 @@ void Empresa::menu() {
 							cout << "Opcao Invalida" << endl;
 							pause();
 							clear();
+							break;
 							menu();
 						}
 
@@ -804,12 +825,12 @@ void Empresa::menu() {
 					cout << i + 1 << "   " << funcionarios[i]->getNome()
 							<< endl;
 				}
-//TODO excepcao listar
+
 				cout << "Qual dos funcionarios deseja examinar?" << endl;
 			try {
 				cin >> numeracao;
 				
-				if(numeracao > 1 || numeracao < funcionarios.size()) {
+				if(numeracao < 1 || numeracao > funcionarios.size()) {
 					FuncionarioInvalido iv;
 					throw iv;
 				}
@@ -818,6 +839,7 @@ void Empresa::menu() {
 				cout << "Funcionario não existente" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 
@@ -861,6 +883,7 @@ void Empresa::menu() {
 				cout << "Opção Invalida: " << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 				
@@ -898,6 +921,7 @@ void Empresa::menu() {
 					cout << "String Overflow" << endl;
 					pause();
 					clear();
+					break;
 					menu(); 
 				}
 								
@@ -941,6 +965,10 @@ void Empresa::menu() {
 						}
 						catch(OpcoesExc) {
 							cout << "Opçao Invalida" << endl;
+							pause();
+							clear();
+							break;
+							menu();
 						}
 
 						pause();
@@ -972,6 +1000,7 @@ void Empresa::menu() {
 					cout << "Tentou remover cliente não existente" << endl;
 					pause();
 					clear();
+					break;
 					menu();
 				}
 						
@@ -996,6 +1025,7 @@ void Empresa::menu() {
 						cout << "Opção Invalida" << endl;
 						pause();
 						clear();
+						break;
 						menu();
 					} 
 						
@@ -1021,6 +1051,7 @@ void Empresa::menu() {
 							cout << "Opção Invalida" << endl;
 							pause();
 							clear();
+							break;
 							menu();
 						} 
 
@@ -1055,6 +1086,7 @@ void Empresa::menu() {
 						cout << "Cliente Invalido" << endl;
 						pause();
 						clear();
+						break;
 						menu();
 					}
 				cin.ignore(1000, '\n');
@@ -1097,6 +1129,7 @@ void Empresa::menu() {
 				cout << "Opção invalida" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 				
@@ -1155,11 +1188,40 @@ void Empresa::menu() {
 						cout << "String Overflow" << endl;
 						pause();
 						clear();
+						break;
 						menu();
 					}
-					
+				
+				try {
 					preco = atof(precoe.c_str());
+					if (preco <= 0) {
+						PrecoServExc ps;
+						throw ps;
+					}
+				}
+				catch(PrecoServExc) {
+					cout << "Preço Invalido" <<endl;
+					pause();
+					clear();
+					break;
+					menu();
+				}
+				
+				try {	
 					duracao = atof(duracaoe.c_str());
+					if(duracao <= 0) {
+						DuracaoServExc ds;
+						throw ds;
+					}
+				}
+				catch(DuracaoServExc) {
+					cout << "Duração Invalida" << endl;
+					pause();
+					clear();
+					break;
+					menu();
+				}
+				
 					Standard *s = new Standard(nome, descricao, preco, duracao,
 							datai, dataf);
 					cout << "Servico bem criado?" << endl;
@@ -1177,6 +1239,7 @@ void Empresa::menu() {
 						cout << "Opção invalida" << endl;
 						pause();
 						clear();
+						break;
 						menu();
 					}
 						
@@ -1198,6 +1261,7 @@ void Empresa::menu() {
 							cout << "Opção invalida" << endl;
 							pause();
 							clear();
+							break;
 							menu();
 						}
 							
@@ -1228,6 +1292,7 @@ void Empresa::menu() {
 						cout << "Tentou remover serviço inexistente" << endl;
 						pause();
 						clear();
+						break;
 						menu();
 					}
 					
@@ -1248,7 +1313,8 @@ void Empresa::menu() {
 					catch (OpcoesExc) {
 						cout << "Opção Invalida" << endl;
 						pause();
-						clear();				
+						clear();
+						break;				
 						menu();
 					}
 					
@@ -1270,7 +1336,8 @@ void Empresa::menu() {
 						catch (OpcoesExc) {
 							cout << "Opção Invalida" << endl;
 							pause();
-							clear();				
+							clear();
+							break;				
 							menu();
 						}
 					}
@@ -1304,6 +1371,7 @@ void Empresa::menu() {
 					cout << "Serviço Inexistente" << endl;
 					pause();
 					clear();
+					break;
 					menu();
 				}
 				
@@ -1334,6 +1402,7 @@ void Empresa::menu() {
 					cout << "Veiculo Invalido" << endl;
 					pause();
 					clear();
+					break;
 					menu();
 				}
 
@@ -1352,6 +1421,7 @@ void Empresa::menu() {
 					cout << "Opcao Invalida" << endl;
 					pause();
 					clear();
+					break;
 					menu();
 				}
 				
@@ -1375,6 +1445,7 @@ void Empresa::menu() {
 						cout << "Servico Invalido" << endl;
 						pause();
 						clear();
+						break;
 						menu();
 					}
 						
@@ -1430,12 +1501,40 @@ void Empresa::menu() {
 							cout << "String overflow" << endl;
 							pause();
 							clear();
+							break;
 							menu();
 						}
 						
-						
+					try {	
 						preco = atof(precoe.c_str());
+						if(preco <= 0) {
+							PrecoServExc ps;
+							throw ps;
+						}	
+					}
+					catch(ServicosExc) {
+						cout << "Preço Invalido" << endl;
+						pause();
+						clear();
+						break;
+						menu();
+					}
+					
+					try {
 						duracao = atof(duracaoe.c_str());
+						if(duracao < 0){
+							DuracaoServExc ds;
+							throw ds;
+						} 
+					}
+					catch (ServicosExc) {
+						cout << "Duracao Invalida" << endl;
+						pause();
+						clear();
+						break;
+						menu();		
+					}
+						
 						Standard *s = new Standard(nome, descricao, preco,
 								duracao, datai, dataf);
 						cout << "Servico bem criado?" << endl;
@@ -1453,6 +1552,7 @@ void Empresa::menu() {
 							cout << "Opção Invalida" << endl;
 							pause();
 							clear();
+							break;
 							menu();
 						}
 						
@@ -1475,6 +1575,7 @@ void Empresa::menu() {
 								cout << "Opção Invalida" << endl;
 								pause();
 								clear();
+								break;
 								menu();
 							}
 							
@@ -1523,7 +1624,9 @@ void Empresa::modificaFunc() {
 		cout << "Funcionario não existente" << endl;
 		pause();
 		clear();
-		menu();
+		//break;
+	//	menu();
+	//	exit(-1);
 	}
 		
 	cin.ignore(1000, '\n');
@@ -1552,7 +1655,9 @@ void Empresa::modificaFunc() {
 		cout << "Opção Invalida" << endl;
 		pause();
 		clear();
-		menu();
+		//break;
+	   //menu();
+	  //exit(-1);
 	}
 	
 	cin.ignore(1000, '\n');
@@ -1578,6 +1683,7 @@ void Empresa::modificaFunc() {
 			cout << "String overflow" << endl;
 			pause();
 			clear();
+			break;
 			menu(); 
 		}
 			
@@ -1603,6 +1709,7 @@ void Empresa::modificaFunc() {
 			cout << "String overflow" << endl;
 			pause();
 			menu();
+			break;
 			clear(); 
 		}
 	 	
@@ -1627,33 +1734,53 @@ void Empresa::modificaFunc() {
 			cout << "String overflow" << endl;
 			pause();
 			clear();
+			break;
 			menu(); 
 		}
 		
 	}
 		break;
 	case 4: {
-	  try {
+		
 		clear();
 		string temp;
 		int horasEx;
+	  try {
+		
 		cout << "Qual o numero das horas extra?" << endl;
 		getline(cin, temp);
 		if(temp.size() > 5) {
-			fHorasExtraOFB h;
-			throw h;
+			fHorasExtraSize fhs;
+			throw fhs;
 		}
+	
+		
 		horasEx = atoi(temp.c_str());
-		funcionarios[numeracao - 1]->setHorasExtra(horasEx);
-		cout << "Horas extra alteradas com sucesso" << endl;
-		pause();
-	}
-		catch (FuncionarioOFB){
+			if(horasEx <= 0) {
+				fHorasExtraOFB o;
+				throw o;
+			}
+		}
+		
+		catch (fHorasExtraOFB){
+			cout << "Horas extra invalidas" << endl;
+			pause();
+			menu();
+			break;
+			clear();
+		}
+		
+		catch (fHorasExtraSize){
 			cout << "String overflow" << endl; 
 			pause();
 			menu();
+			break;
 			clear();
 		}
+	
+		funcionarios[numeracao - 1]->setHorasExtra(horasEx);
+		cout << "Horas extra alteradas com sucesso" << endl;
+		pause();
 			
 	}
 		break;
@@ -1664,19 +1791,34 @@ void Empresa::modificaFunc() {
 		int salario;
 		cout << "Qual o novo salario?" << endl;
 		getline(cin, temp);
-		if(temp.size()){
-			fSalarioOFB s;
-			throw s;
+		
+		if(temp.size() > 5){
+			fSalarioSize fss;
+			throw fss;
 		}
+		
 		salario = atoi(temp.c_str());
+		if(salario <= 0) {
+			fSalarioOFB of;
+			throw of;
+		}
+			
 		funcionarios[numeracao - 1]->setSalario(salario);
 		cout << "Salario alterado com sucesso" << endl;
 		pause();
 	}
-		catch (FuncionarioOFB){
+		catch (fSalarioSize){
 			cout << "String overflow" << endl; 
 			pause();
 			menu();
+			break;
+			clear();
+		}
+		catch (fSalarioOFB) {
+			cout << "Salario Invalido" << endl;
+			pause();
+			menu();
+			break;
 			clear();
 		}
 		
@@ -1700,11 +1842,12 @@ void Empresa::modificaFunc() {
 			cout << "String overflow" << endl; 
 			pause();
 			menu();
+			break;
 			clear();
 		}
 	}
 		break;
-	//TODO A partir daqui :(	
+	
 	case 7: {
 		clear();
 		int opcao, nrvei;
@@ -1722,6 +1865,7 @@ void Empresa::modificaFunc() {
 			cout << "Opção Invalida" << endl;
 			pause();
 			clear();
+			break;
 			menu();
 		}
 			
@@ -1747,6 +1891,7 @@ void Empresa::modificaFunc() {
 				cout << "Veiculo Inexistente" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -1781,6 +1926,7 @@ void Empresa::modificaFunc() {
 				cout << "Veiculo Inexistente" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 						
@@ -1804,7 +1950,7 @@ void Empresa::modificaFunc() {
 	}
 
 }
-//TODO FASE 2!!
+
 void Empresa::modificaCli() {
 
 	clear();
@@ -1846,8 +1992,10 @@ void Empresa::modificaCli() {
 	catch (OpcoesExc) {
 		cout << "Opção invalida" << endl;
 		pause();
-		menu();
 		clear();
+		/*menu();
+		exit(-1);*/
+		
 	}
 		
 		
@@ -1869,6 +2017,7 @@ void Empresa::modificaCli() {
 			cout << "String overflow" << endl;
 			pause();
 			menu();
+			break;
 			clear();
 		}
 		
@@ -1892,6 +2041,7 @@ void Empresa::modificaCli() {
 			cout << "String overflow" << endl;
 			pause();
 			menu();
+			break;
 			clear();
 		}
 		
@@ -1916,6 +2066,7 @@ void Empresa::modificaCli() {
 			cout << "String overflow" << endl;
 			pause();
 			menu();
+			break;
 			clear();
 		}
 		
@@ -1954,7 +2105,9 @@ void Empresa::menuVeiculos() {
 		cout << "Opção Invalida" << endl;
 		pause();
 		clear();
-		menu();
+		//break;
+		/*menu();
+		exit(-1);*/
 	}
 		
 	cin.ignore(1000, '\n');
@@ -1983,6 +2136,7 @@ void Empresa::menuVeiculos() {
 		cout << "Opção Invalida" << endl;
 		pause();
 		clear();
+		break;
 		menu();
 	}
 		
@@ -2003,6 +2157,7 @@ void Empresa::menuVeiculos() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2018,6 +2173,7 @@ void Empresa::menuVeiculos() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2033,6 +2189,7 @@ void Empresa::menuVeiculos() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2049,6 +2206,7 @@ void Empresa::menuVeiculos() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2074,6 +2232,7 @@ void Empresa::menuVeiculos() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2089,6 +2248,7 @@ void Empresa::menuVeiculos() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 				
@@ -2104,6 +2264,7 @@ void Empresa::menuVeiculos() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2119,6 +2280,7 @@ void Empresa::menuVeiculos() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 
@@ -2145,6 +2307,7 @@ void Empresa::menuVeiculos() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2160,6 +2323,7 @@ void Empresa::menuVeiculos() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2175,6 +2339,7 @@ void Empresa::menuVeiculos() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2189,7 +2354,7 @@ void Empresa::menuVeiculos() {
 
 	}
 		break;
-//TODO Tou aqui!
+
 	case 2: {
 		clear();
 		int opcao, temp;
@@ -2210,6 +2375,7 @@ void Empresa::menuVeiculos() {
 			cout << "Opção Invalida" << endl;
 			pause();
 			menu();
+			break;
 			clear();
 		}
 			
@@ -2233,11 +2399,11 @@ void Empresa::menuVeiculos() {
 			catch (VeicExc){
 				cout << "Carro inexistente" << endl;
 				pause();
-				menu();
 				clear();
+				break;
+				menu();
 			}
-				
-				
+								
 			cin.ignore(1000, '\n');
 
 			removeCarro(temp - 1);
@@ -2261,8 +2427,9 @@ void Empresa::menuVeiculos() {
 			catch (VeicExc){
 				cout << "Camiao inexistente" << endl;
 				pause();
-				menu();
 				clear();
+				break;
+				menu();			
 			}
 				
 			cin.ignore(1000, '\n');
@@ -2289,8 +2456,9 @@ void Empresa::menuVeiculos() {
 			catch (VeicExc){
 				cout << "Bus inexistente" << endl;
 				pause();
-				menu();
 				clear();
+				break;
+				menu();			
 			}
 			
 			cin.ignore(1000, '\n');
@@ -2330,6 +2498,10 @@ void Empresa::menuVeiculos() {
 		}
 		catch (OpcoesExc){
 			cout << "Opção invalida" << endl;
+			pause();
+			clear();
+			break;
+			menu();
 		}
 			
 		cin.ignore(1000, '\n');
@@ -2352,6 +2524,7 @@ void Empresa::menuVeiculos() {
 				cout << "Carro inexistente" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 				
@@ -2381,6 +2554,7 @@ void Empresa::menuVeiculos() {
 				cout << "Camião inexistente" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2409,6 +2583,7 @@ void Empresa::menuVeiculos() {
 				cout << "Bus inexistente" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2438,6 +2613,7 @@ void Empresa::menuVeiculos() {
 				cout << "Veiculo inexistente" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2483,6 +2659,7 @@ void Empresa::modificaVeic() {
 		cout << "Opção invalida" << endl;
 		pause();
 		clear();
+	//	break;
 		menu();
 	}
 				
@@ -2507,6 +2684,7 @@ void Empresa::modificaVeic() {
 			cout << "Carro inexistente" << endl;
 			pause();
 			clear();
+			break;
 			menu();		
 		}
 			
@@ -2530,6 +2708,7 @@ void Empresa::modificaVeic() {
 			cout << "Opção invalida" << endl;
 			pause();
 			clear();
+			break;
 			menu();
 		}
 		
@@ -2552,6 +2731,7 @@ void Empresa::modificaVeic() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2572,6 +2752,7 @@ void Empresa::modificaVeic() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2591,6 +2772,7 @@ void Empresa::modificaVeic() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2610,6 +2792,7 @@ void Empresa::modificaVeic() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2643,6 +2826,7 @@ void Empresa::modificaVeic() {
 			cout << "Camiao inexistente" << endl;
 			pause();
 			clear();
+			break;
 			menu();
 		}
 		
@@ -2666,6 +2850,7 @@ void Empresa::modificaVeic() {
 			cout << "Opção Invalida" << endl;
 			pause();
 			clear();
+			break;
 			menu();
 		}
 		
@@ -2684,6 +2869,10 @@ void Empresa::modificaVeic() {
 			}
 			catch (VeicExc) {
 				cout << "String overflow" << endl;
+				pause();
+				clear();
+				break;
+				menu();
 			}
 			
 			camioes[nCarro - 1]->setMarca(marca);
@@ -2701,6 +2890,10 @@ void Empresa::modificaVeic() {
 			}
 			catch (VeicExc) {
 				cout << "String overflow" << endl;
+				pause();
+				clear();
+				break;
+				menu();
 			}
 			
 			camioes[nCarro - 1]->setMarca(modelo);
@@ -2717,6 +2910,10 @@ void Empresa::modificaVeic() {
 			}
 			catch (VeicExc) {
 				cout << "String overflow" << endl;
+				pause();
+				clear();
+				break;
+				menu();
 			}
 			
 			camioes[nCarro - 1]->setMatricula(matricula);
@@ -2733,6 +2930,10 @@ void Empresa::modificaVeic() {
 			}
 			catch (VeicExc) {
 				cout << "String overflow" << endl;
+				pause();
+				clear();
+				break;
+				menu();
 			}
 			
 			camioes[nCarro - 1]->setCategoria(categoria);
@@ -2766,6 +2967,7 @@ void Empresa::modificaVeic() {
 			cout << "Bus inexistente" << endl;
 			pause();
 			clear();
+			break;
 			menu();
 		}
 			
@@ -2790,6 +2992,7 @@ void Empresa::modificaVeic() {
 			cout << "Opção Invalida" << endl;
 			pause();
 			clear();
+			break;
 			menu();
 		}
 		
@@ -2811,6 +3014,7 @@ void Empresa::modificaVeic() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2831,6 +3035,7 @@ void Empresa::modificaVeic() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2850,6 +3055,7 @@ void Empresa::modificaVeic() {
 				cout << "String overflow" << endl;
 				pause();
 				clear();
+				break;
 				menu();
 			}
 			
@@ -2892,6 +3098,7 @@ void Empresa::modificaServ() {
 		cout << "Servico Inixestente" << endl;
 		pause();
 		clear();
+	//	break;
 		menu();
 	}
 		
@@ -2917,6 +3124,7 @@ void Empresa::modificaServ() {
 		cout << "Opção invalida" << endl;
 		pause();
 		clear();
+	//	break;
 		menu();
 	}
 		
@@ -2938,6 +3146,7 @@ void Empresa::modificaServ() {
 			cout << "String overflow" << endl;
 			pause();
 			clear();
+			break;
 			menu();
 		}
 		
@@ -2959,6 +3168,7 @@ void Empresa::modificaServ() {
 			cout << "String overflow" << endl;
 			pause();
 			clear();
+			break;
 			menu();
 		}
 		
@@ -2980,6 +3190,7 @@ void Empresa::modificaServ() {
 			cout << "String overflow" << endl;
 			pause();
 			clear();
+			break;
 			menu();
 		}
 		
@@ -3001,6 +3212,7 @@ void Empresa::modificaServ() {
 			cout << "String overflow" << endl;
 			pause();
 			clear();
+			break;
 			menu();
 		}
 		
@@ -3022,11 +3234,27 @@ void Empresa::modificaServ() {
 			cout << "String overflow" << endl;
 			pause();
 			clear();
+			break;
 			menu();
 		}
 		
 		cin.ignore(1000, '\n');
-		preco = atof(precoe.c_str());
+		
+		try {
+			preco = atof(precoe.c_str());
+			if(preco <= 0) {
+				PrecoServExc pc;
+				throw pc;
+			}
+		}
+		catch (PrecoServExc) {
+			cout << "Preço Invalido" << endl;
+			pause();
+			clear();
+			break;
+			menu();
+		}
+			
 		standards[escolha - 1]->setPreco(preco);
 	}
 		break;
@@ -3044,12 +3272,24 @@ void Empresa::modificaServ() {
 			cout << "String overflow" << endl;
 			pause();
 			clear();
+			break;
 			menu();
 		}
 		
 		cin.ignore(1000, '\n');
-		duracao = atof(duracaoe.c_str());
-		standards[escolha - 1]->setDuracao(duracao);
+		
+		try {
+			duracao = atof(duracaoe.c_str());
+			if(duracao <= 0) {
+				DuracaoServExc dr;
+				throw dr;
+			}
+		}
+		catch (ServicosExc) {
+			cout << "Duração Invalida" << endl;
+		}
+					
+			standards[escolha - 1]->setDuracao(duracao);
 	}
 		break;
 
@@ -3078,6 +3318,7 @@ void Empresa::listaVeiculosServicos(Veiculo *v) {
 		cout << "Opção Invalida" << endl;
 		pause();
 		clear();
+	//	break;
 		menu();
 	}
 
@@ -3106,6 +3347,7 @@ void Empresa::adicionaVeiculoFuncionario() {
 		cout << "Funcionario inexistente" << endl;
 		pause();
 		clear();
+	//	break;
 		menu();
 	}
 
@@ -3124,6 +3366,7 @@ void Empresa::adicionaVeiculoFuncionario() {
 		cout << "Veiculo inexistente" << endl;
 		pause();
 		clear();
+	//	break;
 		menu();
 	}
 

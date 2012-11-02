@@ -21,10 +21,5 @@ using namespace std;
 
 int main(){
 	Empresa *emp = new Empresa();
-
-
-
-
 	emp->menu();
-
 }
