@@ -2198,7 +2198,22 @@ void Empresa::menuVeiculos() {
 		cout << "Camiao------------------2" << endl;
 		cout << "Bus---------------------3" << endl;
 		cout << "Sair--------------------0" << endl;
-		cin >> opcao;
+		
+		try{
+			cin >> opcao;
+			if(opcao < 0 || opcao > 3){
+				OFBOpcoes o;
+				throw o;
+			}
+		}
+		catch (OpcoesExc) {
+			cout << "Opção Invalida" << endl;
+			pause();
+			menu();
+			clear();
+		}
+			
+			
 		cin.ignore(1000, '\n');
 
 		switch (opcao) {
@@ -2208,7 +2223,21 @@ void Empresa::menuVeiculos() {
 				cout << i + 1 << "   " << carros[i]->getMarca() << endl;
 			}
 			cout << "Selecione o carro que deseja eliminar" << endl;
-			cin >> temp;
+			try{
+				cin >> temp;
+				if(temp < 1 || temp > carros.size()){
+					CarInvalido ci;
+					throw ci;
+				}
+			}
+			catch (VeicExc){
+				cout << "Carro inexistente" << endl;
+				pause();
+				menu();
+				clear();
+			}
+				
+				
 			cin.ignore(1000, '\n');
 
 			removeCarro(temp - 1);
@@ -2221,7 +2250,21 @@ void Empresa::menuVeiculos() {
 				cout << i + 1 << "   " << camioes[i]->getMarca() << endl;
 			}
 			cout << "Selecione o camiao que deseja eliminar" << endl;
-			cin >> temp;
+					
+			try{
+				cin >> temp;
+				if(temp < 1 || temp > camioes.size()){
+					CamiaoInvalido ti;
+					throw ti;
+				}
+			}
+			catch (VeicExc){
+				cout << "Camiao inexistente" << endl;
+				pause();
+				menu();
+				clear();
+			}
+				
 			cin.ignore(1000, '\n');
 
 			removeCamiao(temp - 1);
@@ -2235,7 +2278,21 @@ void Empresa::menuVeiculos() {
 				cout << i + 1 << "   " << buses[i]->getMarca() << endl;
 			}
 			cout << "Selecione o bus que deseja eliminar" << endl;
-			cin >> temp;
+			
+			try{
+				cin >> temp;
+				if(temp < 1 || temp > buses.size()){
+					BusInvalido bi;
+					throw bi;
+				}
+			}
+			catch (VeicExc){
+				cout << "Bus inexistente" << endl;
+				pause();
+				menu();
+				clear();
+			}
+			
 			cin.ignore(1000, '\n');
 
 			removeBus(temp - 1);
