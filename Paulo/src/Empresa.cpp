@@ -3066,7 +3066,20 @@ void Empresa::listaVeiculosServicos(Veiculo *v) {
 	cout << "Deseja listar os servicos associados a este veiculo?" << endl;
 	cout << "Sim-------------------1" << endl;
 	cout << "Nao-------------------2" << endl;
-	cin >> opcao;
+	
+	try {
+		cin >> opcao;
+		if(opcao < 1 || opcao > 2) {
+			OFBOpcoes o;
+			throw o;
+		}
+	}
+	catch (OpcoesExc) {
+		cout << "Opção Invalida" << endl;
+		pause();
+		clear();
+		menu();
+	}
 
 	if (opcao == 1) {
 		for (unsigned int i = 0; i < v->getStandards().size(); i++) {
@@ -3082,13 +3095,37 @@ void Empresa::adicionaVeiculoFuncionario() {
 	for (unsigned int i = 0; i < funcionarios.size(); i++) {
 		cout << i + 1 << "   " << funcionarios[i]->getNome() << endl;
 	}
-	cin >> opcao;
+	try {
+		cin >> opcao;
+		if(opcao < 1 || opcao > funcionarios.size()){
+			FuncionarioInvalido fi;
+			throw fi;
+		}
+	}
+	catch (FuncionarioOFB){
+		cout << "Funcionario inexistente" << endl;
+		pause();
+		clear();
+		menu();
+	}
 
 	cout << "Qual o veiculo que quer adicionar? " << endl;
 	for (unsigned int i = 0; i < veiculos.size(); i++) {
 		cout << i + 1 << "   " << veiculos[i]->getMarca() << endl;
 	}
-	cin >> opcao2;
+	try {
+		cin >> opcao2;
+		if(opcao2 < 1 || opcao2 > veiculos.size()) {
+			VeicInvalido vi;
+			throw vi;
+		}
+	}
+	catch (VeicExc) {
+		cout << "Veiculo inexistente" << endl;
+		pause();
+		clear();
+		menu();
+	}
 
 	funcionarios[opcao - 1]->adicionaVeiculo(veiculos[opcao2 - 1]);
 
