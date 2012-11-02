@@ -1710,8 +1710,23 @@ void Empresa::modificaFunc() {
 		int opcao, nrvei;
 		cout << "Adicionar veiculo--------1" << endl;
 		cout << "Remover veiculo----------2" << endl;
-		cin >> opcao;
-		cin.ignore(1000, '\n');
+		
+		try {
+			cin >> opcao;
+			if (opcao < 1 || opcao > 2) {
+				OFBOpcoes o;
+				throw o;
+			}
+		}
+		catch (OpcoesExc){
+			cout << "Opção Invalida" << endl;
+			pause();
+			clear();
+			menu();
+		}
+			
+			
+			cin.ignore(1000, '\n');
 
 		if (opcao == 1) {
 			clear();
@@ -1720,7 +1735,22 @@ void Empresa::modificaFunc() {
 				cout << i + 1 << "   " << veiculos[i]->getMarca() << endl;
 			}
 			cout << "Selecione veiculo para adicionar" << endl;
-			cin >> nrvei;
+			
+			try {
+				cin >> nrvei;
+				if(nrvei < 1 || nrvei > veiculos.size()) {
+					VeicInvalido vi;
+					throw vi;
+				}
+			}
+			catch (VeicExc){
+				cout << "Veiculo Inexistente" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
+			
 			cin.ignore(1000, '\n');
 
 			funcionarios[numeracao - 1]->adicionaVeiculo(veiculos[nrvei - 1]);
@@ -1739,7 +1769,21 @@ void Empresa::modificaFunc() {
 							<< endl;
 				}
 				cout << "Selecione veiculo para retirar" << endl;
-				cin >> nrvei;
+				
+				try {
+					cin >> nrvei;
+					if(nrvei < 1 || nrvei > veiculos.size()) {
+					VeicInvalido vi;
+					throw vi;
+					}
+				}
+			catch (VeicExc){
+				cout << "Veiculo Inexistente" << endl;
+				pause();
+				clear();
+				menu();
+			}
+						
 				cin.ignore(1000, '\n');
 
 				funcionarios[numeracao - 1]->removeVeiculo(nrvei - 1);
@@ -1760,7 +1804,7 @@ void Empresa::modificaFunc() {
 	}
 
 }
-
+//TODO FASE 2!!
 void Empresa::modificaCli() {
 
 	clear();
@@ -1769,7 +1813,17 @@ void Empresa::modificaCli() {
 		cout << i + 1 << "  " << clientes[i]->getNome() << endl;
 	}
 	cout << "Qual o cliente que deseja modificar?" << endl;
-	cin >> indice;
+	try {
+		cin >> indice;
+		if(indice < 1 || indice > clientes.size()){
+			ClienteInvalido ci;
+			throw ci;
+		}
+	}
+	catch (ClienteOFB){
+			cout << "Cliente Inexistente" << endl;
+	}
+		
 	cin.ignore(1000, '\n');
 
 	clear();
@@ -1781,7 +1835,22 @@ void Empresa::modificaCli() {
 	cout << "Contacto ------------2" << endl;
 	cout << "Morada---------------3" << endl;
 	cout << "Sair-----------------0" << endl;
-	cin >> temp;
+	
+	try {
+		cin >> temp;
+		if(temp < 0 || temp > 3) {
+			OFBOpcoes o;
+			throw o;
+		}
+	}
+	catch (OpcoesExc) {
+		cout << "Opção invalida" << endl;
+		pause();
+		menu();
+		clear();
+	}
+		
+		
 	cin.ignore(1000, '\n');
 
 	switch (temp) {
@@ -1790,6 +1859,19 @@ void Empresa::modificaCli() {
 		string nome;
 		cout << "Qual o novo nome?" << endl;
 		getline(cin, nome);
+	try {
+		if(nome.size() > 5){
+			cNomeOFB cn;
+			throw cn;
+		}
+	}
+		catch(ClienteOFB) {
+			cout << "String overflow" << endl;
+			pause();
+			menu();
+			clear();
+		}
+		
 		clientes[indice - 1]->setNome(nome);
 		cout << "Nome alterado com sucesso" << endl;
 		pause();
@@ -1800,6 +1882,20 @@ void Empresa::modificaCli() {
 		string contacto;
 		cout << "Qual o novo contacto?" << endl;
 		getline(cin, contacto);
+	try {
+		if(contacto.size() > 5){
+			cContactoOFB ct;
+			throw ct;
+		}
+	}
+		catch(ClienteOFB) {
+			cout << "String overflow" << endl;
+			pause();
+			menu();
+			clear();
+		}
+		
+		
 		clientes[indice - 1]->setContacto(contacto);
 		cout << "Contacto alterado com sucesso" << endl;
 		pause();
@@ -1810,6 +1906,19 @@ void Empresa::modificaCli() {
 		string morada;
 		cout << "Qual a nova morada?" << endl;
 		getline(cin, morada);
+	try {
+		if(morada.size() > 5){
+			cMoradaOFB md;
+			throw md;
+		}
+	}
+		catch(ClienteOFB) {
+			cout << "String overflow" << endl;
+			pause();
+			menu();
+			clear();
+		}
+		
 		clientes[indice - 1]->setMorada(morada);
 		cout << "Morada alterada com sucesso" << endl;
 		pause();
@@ -1833,7 +1942,21 @@ void Empresa::menuVeiculos() {
 	cout << "Modificar Veiculo----------3" << endl;
 	cout << "Listar Veiculos------------4" << endl;
 	cout << "Sair ----------------------0" << endl;
-	cin >> opcao;
+	
+	try {
+		cin >> opcao;
+		if(opcao < 0 || opcao > 4){
+			OFBOpcoes o;
+			throw o;
+		}
+	}
+	catch (OpcoesExc) {
+		cout << "Opção Invalida" << endl;
+		pause();
+		clear();
+		menu();
+	}
+		
 	cin.ignore(1000, '\n');
 
 	switch (opcao) {
@@ -1848,20 +1971,87 @@ void Empresa::menuVeiculos() {
 		cout << "Camiao--------------2" << endl;
 		cout << "Bus-----------------3" << endl;
 		cout << "Sair----------------0" << endl;
+		
+	try {
 		cin >> i;
+		if(i < 0 || i > 3){
+			OFBOpcoes o;
+			throw o;
+		}
+	}
+	catch (OpcoesExc){
+		cout << "Opção Invalida" << endl;
+		pause();
+		clear();
+		menu();
+	}
+		
 		cin.ignore(1000, '\n');
 
 		switch (i) {
-		case 1: {
+		case 1: {  //Carro
 			clear();
 			cout << "Insira marca" << endl;
 			getline(cin, marca);
+			try {
+				if(marca.size() > 5) {
+					CarMarcaExc cm;
+					throw cm;
+				}
+			}
+			catch(VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			cout << "Insira modelo" << endl;
 			getline(cin, modelo);
+			try {
+				if(modelo.size() > 5) {
+					CarModeloExc cmd;
+					throw cmd;
+				}
+			}
+			catch(VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 			cout << "Insira Matricula (XX-XX-XX)" << endl;
 			getline(cin, matricula);
+			try {
+				if(matricula.size() > 5) {
+					CarMatrExc cmt;
+					throw cmt;
+				}
+			}
+			catch(VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
+			
 			cout << "Insira categoria" << endl;
 			getline(cin, tipo);
+			try {
+				if(tipo.size() > 5) {
+					CarCategoriaExc cg;
+					throw cg;
+				}
+			}
+			catch(VeicExc) {
+				cout << "String overflow" << endl;
+				pause();
+				clear();
+				menu();
+			}
+			
 
 			Carro *c = new Carro(marca, modelo, matricula, tipo);
 			veiculos.push_back(c);
@@ -1870,7 +2060,7 @@ void Empresa::menuVeiculos() {
 
 		}
 			break;
-		case 2: {
+		case 2: { //Camiao
 			clear();
 			cout << "Insira marca" << endl;
 			getline(cin, marca);

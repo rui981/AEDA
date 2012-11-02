@@ -50,5 +50,11 @@ class OFBOpcoes: public OpcoesExc {}; //Opcao out of bounds
 //Excepções Veiculos
 class VeicExc {};
 class VeicInvalido: public VeicExc {};
+//Carros
+class CarMarcaExc: public VeicExc {};
+class CarModeloExc: public VeicExc {};
+class CarMatrExc: public VeicExc {};
+class CarCategoriaExc: public VeicExc {};
+
 
 #endif /* EXCEPTION_H_ */
